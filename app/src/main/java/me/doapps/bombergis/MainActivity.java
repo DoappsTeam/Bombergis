@@ -99,7 +99,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void setUpMap() {
         map.setMyLocationEnabled(true);
-        map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         map.getUiSettings().setZoomControlsEnabled(true);
         //mapSettings = map.getUiSettings();
         map.getUiSettings().setScrollGesturesEnabled(true);
@@ -107,21 +107,117 @@ public class MainActivity extends ActionBarActivity {
         map.getUiSettings().setRotateGesturesEnabled(true);
 
         /*Marker marker = map.addMarker(new MarkerOptions().position(new LatLng(-12.1023776, -77.0219219)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));*/
-        Marker marker = map.addMarker(new MarkerOptions()
-                .position(new LatLng(-12.1023776,-77.0219219))
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_school)));
-        Marker marker2 = map.addMarker(new MarkerOptions()
-                .position(new LatLng(-12.1021255,-77.0219215))
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_hospital)));
 
         CameraPosition camPos = new CameraPosition.Builder()
                 .target(new LatLng(-12.1023776,-77.0219219))
-                .zoom(16)
+                .zoom(10)
                 .build();
         CameraUpdate camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
         map.animateCamera(camUpd3);
     }
 
+
+    int stateHospitales = 0;
+    int stateColegios = 0;
+    int stateHidrantes = 0;
+    int stateBomberos = 0;
+    int stateGrifos = 0;
+    int stateComisarias = 0;
+
+    public void mostrarHospitales(View view){
+        if(stateHospitales == 0){stateHospitales = 1;}
+        else{stateHospitales = 0;}
+        mostrar();
+    }
+
+    public void mostrarColegios(View view){
+        if(stateColegios == 0){stateColegios = 1;}
+        else{stateColegios = 0;}
+        mostrar();
+    }
+
+    public void mostrarHidrantes(View view){
+        if(stateHidrantes == 0){stateHidrantes = 1;}
+        else{stateHidrantes = 0;}
+        mostrar();
+    }
+
+    public void mostrarBomberos(View view){
+        if(stateBomberos == 0){stateBomberos = 1;}
+        else{stateBomberos = 0;}
+        mostrar();
+    }
+
+    public void mostrarGrifos(View view){
+        if(stateGrifos == 0){stateGrifos = 1;}
+        else{stateGrifos = 0;}
+        mostrar();
+    }
+
+    public void mostrarComisarias(View view){
+        if(stateComisarias == 0){stateComisarias= 1;}
+        else{stateComisarias = 0;}
+        mostrar();
+    }
+
+    public void mostrar(){
+        map.clear();
+        if(stateHospitales == 1)
+        {
+            for(int i = 0;i<hospitales.size();i++){
+                map.addMarker(new MarkerOptions()
+                        .position(hospitales.get(i))
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_hospital)));
+            }
+        }
+
+        if(stateColegios == 1)
+        {
+            for(int i = 0;i<colegios.size();i++){
+                map.addMarker(new MarkerOptions()
+                        .position(hospitales.get(i))
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_school)));
+            }
+        }
+
+        if(stateHidrantes == 1)
+        {
+            for(int i = 0;i<hidrantes.size();i++){
+                map.addMarker(new MarkerOptions()
+                        .position(hidrantes.get(i))
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_hydrant)));
+            }
+        }
+
+        if(stateBomberos == 1)
+        {
+            for(int i = 0;i<bomberos.size();i++){
+                map.addMarker(new MarkerOptions()
+                        .position(bomberos.get(i))
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_fireman)));
+            }
+        }
+
+        if(stateGrifos== 1)
+        {
+            for(int i = 0;i<grifos.size();i++){
+                map.addMarker(new MarkerOptions()
+                        .position(grifos.get(i))
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_gasstation)));
+            }
+        }
+        if(stateComisarias == 1)
+        {
+            for(int i = 0;i<comisarias.size();i++){
+                map.addMarker(new MarkerOptions()
+                        .position(comisarias.get(i))
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_policestation)));
+            }
+        }
+    }
+
+
+    /*
     Marker marker3;
     Marker marker4;
     Marker marker5;
@@ -187,5 +283,5 @@ public class MainActivity extends ActionBarActivity {
                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_comisaria)));
 
         }
-    }
+    }*/
 }
