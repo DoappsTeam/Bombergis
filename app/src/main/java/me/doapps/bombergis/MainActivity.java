@@ -2,6 +2,8 @@ package me.doapps.bombergis;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,11 +15,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by user on 26/05/2015.
  */
 public class MainActivity extends ActionBarActivity {
     private GoogleMap map;
+    private List<LatLng> hospitales;
+    private List<LatLng> colegios;
     UiSettings mapSettings;
 
     @Override
@@ -25,6 +32,11 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpMapIfNeeded();
+
+        /*agregamos hospitales*/
+        hospitales = new ArrayList<>();
+        hospitales.add(new LatLng(-12.101524,-77.021626));
+        hospitales.add(new LatLng(-12.097663,-77.022184));
     }
 
     private void setUpMapIfNeeded() {
@@ -59,5 +71,22 @@ public class MainActivity extends ActionBarActivity {
                 .build();
         CameraUpdate camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
         map.animateCamera(camUpd3);
+    }
+
+    Marker marker3;
+
+    public void mostrarHospitales(View view){
+      map.clear();
+
+        for(int i = 0;i<hospitales.size();i++){
+            marker3 = map.addMarker(new MarkerOptions()
+                    .position(hospitales.get(i))
+                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_hospital)));
+        }
+    }
+
+    public void mostrarColegios(View view){
+        map.clear();
+
     }
 }
