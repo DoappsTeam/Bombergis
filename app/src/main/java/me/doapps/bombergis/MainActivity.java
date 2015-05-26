@@ -2,12 +2,6 @@ package me.doapps.bombergis;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.TypedValue;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.ZoomControls;
-
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -66,8 +60,4 @@ public class MainActivity extends ActionBarActivity {
         CameraUpdate camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
         map.animateCamera(camUpd3);
     }
-
-
-
-
 }
