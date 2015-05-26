@@ -19,37 +19,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView1"
-            android:src="@mipmap/ic_marker"/>
+            android:src="@mipmap/ic_hospital"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView2"
-            android:src="@mipmap/ic_marker"/>
+            android:src="@mipmap/ic_school"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView3"
-            android:src="@mipmap/ic_marker"/>
+            android:src="@mipmap/ic_hydrant"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView4"
-            android:src="@mipmap/ic_marker"/>
+            android:src="@mipmap/ic_fireman"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView5"
-            android:src="@mipmap/ic_marker"/>
+            android:src="@mipmap/ic_gasstation"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView6"
-            android:src="@mipmap/ic_marker"/>
+            android:src="@mipmap/ic_policestation"/>
 
     </LinearLayout>
 
