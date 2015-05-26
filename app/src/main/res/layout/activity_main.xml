@@ -15,41 +15,47 @@
         android:layout_height="200dp"
         android:orientation="horizontal">
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView1"
-            android:src="@mipmap/ic_hospital"/>
+            android:src="@mipmap/ic_hospital"
+            android:onClick="mostrarHospitales"/>
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView2"
-            android:src="@mipmap/ic_school"/>
+            android:src="@mipmap/ic_school"
+            android:onClick="mostrarColegios"/>
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView3"
-            android:src="@mipmap/ic_hydrant"/>
+            android:src="@mipmap/ic_hydrant"
+            android:onClick="mostrarHidrantes"/>
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView4"
-            android:src="@mipmap/ic_fireman"/>
+            android:src="@mipmap/ic_fireman"
+            android:onClick="mostrarBomberos"/>
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView5"
-            android:src="@mipmap/ic_gasstation"/>
+            android:src="@mipmap/ic_gasstation"
+            android:onClick="mostrarGrifos"/>
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView6"
-            android:src="@mipmap/ic_policestation"/>
+            android:src="@mipmap/ic_policestation"
+            android:onClick="mostrarComisarias"/>
 
     </LinearLayout>
 
