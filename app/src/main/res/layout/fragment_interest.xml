@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="20dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:gravity="center"
         android:text="Bombergis"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#000000"
         android:textSize="30dp"
-        android:textStyle="bold"
-        android:gravity="center"/>
-    >
+        android:textStyle="bold" />
+
+
     <CheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hidrantes de Agua"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
+        android:text="Hidrantes de Agua"
         android:textColor="#000000"
-        android:textSize="13dp"
-        />
+        android:textSize="13dp" />
+
     <CheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
         android:text="Centros Educativos"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
         android:textColor="#000000"
-        android:textSize="13dp"
-        />
+        android:textSize="13dp" />
+
     <CheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
         android:text="Comisarias"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
         android:textColor="#000000"
-        android:textSize="13dp"
-        />
+        android:textSize="13dp" />
+
     <CheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Grifos"
-        android:layout_marginTop="10dp"
-        android:textColor="#000000"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="15dp"
-        android:textSize="13dp"
-        />
+        android:layout_marginTop="10dp"
+        android:text="Grifos"
+        android:textColor="#000000"
+        android:textSize="13dp" />
 
 
 </LinearLayout>

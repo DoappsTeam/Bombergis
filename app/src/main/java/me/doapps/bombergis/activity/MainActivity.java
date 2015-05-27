@@ -1,4 +1,4 @@
-package me.doapps.bombergis;
+package me.doapps.bombergis.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -17,6 +17,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import me.doapps.bombergis.R;
 
 /**
  * Created by user on 26/05/2015.
