@@ -28,7 +28,7 @@
         <ImageButton
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/bntInterest"
+            android:id="@+id/btnInterest"
             android:src="@mipmap/ic_interest"
             android:paddingLeft="40dp"
             android:onClick="Interest"/>
@@ -36,7 +36,7 @@
         <ImageButton
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/bntMaps"
+            android:id="@+id/btnMaps"
             android:src="@mipmap/ic_maps"
             android:paddingLeft="40dp"
             android:onClick="Maps"/>
@@ -44,7 +44,7 @@
         <ImageButton
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/bntRoute"
+            android:id="@+id/btnRoute"
             android:src="@mipmap/ic_route"
             android:paddingLeft="40dp"
             android:onClick="Route"/>

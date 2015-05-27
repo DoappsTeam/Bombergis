@@ -17,6 +17,7 @@
 
 
     <CheckBox
+        android:id="@+id/checkHidrantes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -53,5 +54,10 @@
         android:textColor="#000000"
         android:textSize="13dp" />
 
+    <Button
+        android:id="@+id/btnTest"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Test"/>
 
 </LinearLayout>
