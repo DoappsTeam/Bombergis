@@ -177,7 +177,7 @@ public class MainActivity extends ActionBarActivity {
         {
             for(int i = 0;i<colegios.size();i++){
                 map.addMarker(new MarkerOptions()
-                        .position(hospitales.get(i))
+                        .position(colegios.get(i))
                         .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_school)));
             }
         }

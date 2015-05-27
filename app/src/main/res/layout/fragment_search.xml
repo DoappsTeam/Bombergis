@@ -22,7 +22,7 @@
         android:inputType="textPersonName"
         android:hint="Ingrese Dirección"
         android:ems="10"
-        android:id="@+id/txtUser"
+        android:id="@+id/txtAddress"
         android:layout_below="@+id/lblLogin"
         android:layout_alignLeft="@+id/txtPass"
         android:layout_alignStart="@+id/txtPass"
@@ -30,6 +30,7 @@
         android:textColor="#ffffff"
         android:textSize="20dp"/>
     <Button
+        android:id="@+id/btnBuscar"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"

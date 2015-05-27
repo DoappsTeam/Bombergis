@@ -148,9 +148,16 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
 
         switch (v.getId()) {
             case R.id.btnSearch:
+                SearchFragment searchFragment=new SearchFragment();
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.containerLayout, new SearchFragment())
+                        .replace(R.id.containerLayout, searchFragment)
                         .commit();
+                searchFragment.setInterfaceSearch(new SearchFragment.InterfaceSearch() {
+                    @Override
+                    public void getAddress(String address) {
+                        Toast.makeText(DashboardActivity.this,address,Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
 
             case R.id.btnInterest:
@@ -227,9 +234,16 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 break;
 
             case R.id.btnRoute:
+                RouteFragment routeFragment = new RouteFragment();
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.containerLayout, new RouteFragment())
+                        .replace(R.id.containerLayout,routeFragment)
                         .commit();
+                routeFragment.setInterfaceRoute(new RouteFragment.InterfaceRoute() {
+                    @Override
+                    public void getRoute(String route) {
+                        Toast.makeText(DashboardActivity.this,route,Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
 
         }
