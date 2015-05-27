@@ -27,15 +27,17 @@
         android:textSize="13dp" />
 
     <CheckBox
+        android:id="@+id/checkColegios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
-        android:text="Centros Educativos"
+        android:text="Colegios"
         android:textColor="#000000"
         android:textSize="13dp" />
 
     <CheckBox
+        android:id="@+id/checkComisarias"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -45,6 +47,7 @@
         android:textSize="13dp" />
 
     <CheckBox
+        android:id="@+id/checkGrifos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -54,10 +57,26 @@
         android:textColor="#000000"
         android:textSize="13dp" />
 
-    <Button
-        android:id="@+id/btnTest"
+    <CheckBox
+        android:id="@+id/checkBomberos"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Test"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:text="Bomberos"
+        android:textColor="#000000"
+        android:textSize="13dp"/>
+
+    <CheckBox
+        android:id="@+id/checkHospitales"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:text="Hospitales"
+        android:textColor="#000000"
+        android:textSize="13dp" />
 
 </LinearLayout>

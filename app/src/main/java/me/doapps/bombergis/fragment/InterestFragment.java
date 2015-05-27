@@ -16,9 +16,21 @@ import me.doapps.bombergis.R;
  * Created by MiguelGarrafa_2 on 27/05/2015.
  */
 public class InterestFragment extends Fragment {
-    private Button btnTest;
     private CheckBox checkHidrantes;
+    private CheckBox checkColegios;
+    private CheckBox checkComisarias;
+    private CheckBox checkGrifos;
+    private CheckBox checkBomberos;
+    private CheckBox checkHospitales;
     private InterfaceInstitutes interfaceInstitutes;
+
+    /* Estado de los botones*/
+    int stateHospitales = 0;
+    int stateColegios = 0;
+    int stateHidrantes = 0;
+    int stateBomberos = 0;
+    int stateGrifos = 0;
+    int stateComisarias = 0;
 
     public InterestFragment(){}
 
@@ -26,8 +38,12 @@ public class InterestFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_interest, container, false);
-        btnTest = (Button) view.findViewById(R.id.btnTest);
         checkHidrantes = (CheckBox) view.findViewById(R.id.checkHidrantes);
+        checkColegios = (CheckBox) view.findViewById(R.id.checkColegios);
+        checkComisarias = (CheckBox) view.findViewById(R.id.checkComisarias);
+        checkGrifos = (CheckBox) view.findViewById(R.id.checkGrifos);
+        checkBomberos = (CheckBox) view.findViewById(R.id.checkBomberos);
+        checkHospitales = (CheckBox) view.findViewById(R.id.checkHospitales);
         return view;
     }
 
@@ -35,21 +51,67 @@ public class InterestFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        checkHidrantes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        checkHospitales.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    interfaceInstitutes.getInstitute(1);
+                if (isChecked) {
+                    stateHospitales = 1;
+                } else {
+                    stateHospitales = 0;
                 }
+                interfaceInstitutes.getInstitute(stateHospitales, stateColegios, stateHidrantes, stateBomberos, stateGrifos, stateComisarias);
             }
         });
 
+        checkColegios.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){stateColegios = 1;}
+                else{stateColegios = 0;}
+                interfaceInstitutes.getInstitute(stateHospitales,stateColegios,stateHidrantes,stateBomberos,stateGrifos,stateComisarias);
+            }
+        });
 
+        checkHidrantes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){stateHidrantes = 1;}
+                else{stateHidrantes = 0;}
+                interfaceInstitutes.getInstitute(stateHospitales,stateColegios,stateHidrantes,stateBomberos,stateGrifos,stateComisarias);
+            }
+        });
+
+        checkBomberos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){stateBomberos = 1;}
+                else{stateBomberos = 0;}
+                interfaceInstitutes.getInstitute(stateHospitales,stateColegios,stateHidrantes,stateBomberos,stateGrifos,stateComisarias);
+            }
+        });
+
+        checkGrifos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){stateGrifos = 1;}
+                else{stateGrifos = 0;}
+                interfaceInstitutes.getInstitute(stateHospitales,stateColegios,stateHidrantes,stateBomberos,stateGrifos,stateComisarias);
+            }
+        });
+
+        checkComisarias.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){stateComisarias = 1;}
+                else{stateComisarias = 0;}
+                interfaceInstitutes.getInstitute(stateHospitales,stateColegios,stateHidrantes,stateBomberos,stateGrifos,stateComisarias);
+            }
+        });
     }
 
     /*inner interface*/
     public interface InterfaceInstitutes{
-        void getInstitute(int flag);
+        void getInstitute(int flag1,int flag2,int flag3,int flag4,int flag5,int flag6);
     }
     public void setInterfaceInstitutes(InterfaceInstitutes interfaceInstitutes){
         this.interfaceInstitutes = interfaceInstitutes;
