@@ -137,7 +137,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
 
         CameraPosition camPos = new CameraPosition.Builder()
                 .target(new LatLng(-12.1023776, -77.0219219))
-                .zoom(14)
+                .zoom(16)
                 .build();
         CameraUpdate camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
         map.animateCamera(camUpd3);
