@@ -15,13 +15,14 @@ import com.google.android.gms.maps.model.LatLng;
 
 import me.doapps.bombergis.R;
 import me.doapps.bombergis.fragment.InterestFragment;
+import me.doapps.bombergis.fragment.SearchFragment;
 
 /**
  * Created by user on 27/05/2015.
  */
 public class DashboardActivity extends ActionBarActivity implements View.OnClickListener {
     private ImageButton btnSearch;
-
+    private ImageButton btnInterest;
     private GoogleMap map;
 
     @Override
@@ -31,10 +32,13 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         /*inicializar el mapa*/
         setUpMapIfNeeded();
         /*cargar un fragment por defecto*/
-        getSupportFragmentManager().beginTransaction().replace(R.id.containerLayout, new InterestFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.containerLayout, new SearchFragment()).commit();
 
         btnSearch = (ImageButton) findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(this);
+
+        btnInterest= (ImageButton) findViewById(R.id.bntInterest);
+        btnInterest.setOnClickListener(this);
     }
 
 
@@ -70,8 +74,13 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     public void onClick(View v) {
         if (v.getId() == R.id.btnSearch) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.containerLayout, new InterestFragment())
+                    .replace(R.id.containerLayout, new SearchFragment())
                     .commit();
         }
+       if (v.getId()== R.id.bntInterest){
+           getSupportFragmentManager().beginTransaction()
+                   .replace(R.id.containerLayout, new InterestFragment())
+                   .commit();
+       }
     }
 }
