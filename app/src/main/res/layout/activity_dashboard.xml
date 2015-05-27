@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/map"
+        android:layout_width="900dp"
+        android:layout_height="600dp"
+        android:layout_margin="10dp"
+        class="com.google.android.gms.maps.SupportMapFragment" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal|bottom">
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/btnSearch"
+            android:src="@mipmap/ic_search"
+            android:paddingLeft="40dp"
+            android:onClick="Search"/>
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/bntInterest"
+            android:src="@mipmap/ic_interest"
+            android:paddingLeft="40dp"
+            android:onClick="Interest"/>
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/bntMaps"
+            android:src="@mipmap/ic_maps"
+            android:paddingLeft="40dp"
+            android:onClick="Maps"/>
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/bntRoute"
+            android:src="@mipmap/ic_route"
+            android:paddingLeft="40dp"
+            android:onClick="Route"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="400dp"
+        android:layout_height="500dp"
+        android:layout_gravity="right|top">
+
+    </LinearLayout>
+
+
+</FrameLayout>
