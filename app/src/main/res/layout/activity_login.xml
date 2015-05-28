@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:text="Login"
+        android:text="@string/login"
         android:textSize="40dp"
         android:layout_gravity="center"
         android:gravity="center"
@@ -17,12 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="Usuario"
+        android:hint="@string/usuario"
         android:ems="10"
         android:id="@+id/txtUser"
-        android:layout_below="@+id/lblLogin"
-        android:layout_alignLeft="@+id/txtPass"
-        android:layout_alignStart="@+id/txtPass"
         android:layout_marginTop="50dp"
         android:textColor="#ffffff"
         android:textSize="20dp"/>
@@ -30,12 +27,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="Contraseña"
+        android:hint="@string/contraseña"
         android:ems="10"
         android:id="@+id/txtPass"
-        android:layout_below="@+id/lblLogin"
-        android:layout_alignLeft="@+id/txtPass"
-        android:layout_alignStart="@+id/txtPass"
         android:layout_marginTop="50dp"
         android:textColor="#ffffff"
         android:textSize="20dp"/>
@@ -43,8 +37,8 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
-        android:text="Ingresar"
+        android:text="@string/ingresar"
         android:layout_gravity="center"
-        android:onClick="ingresar"
-        />
+        android:onClick="ingresarCuenta"
+        android:id="@+id/btnLogin"/>
 </LinearLayout>
