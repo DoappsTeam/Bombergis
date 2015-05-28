@@ -3,12 +3,13 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@color/saffron">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:text="@string/login"
-        android:textSize="50dp"
+        android:textSize="50sp"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_weight="0.07"
@@ -23,7 +24,7 @@
         android:id="@+id/txtUser"
         android:layout_marginTop="50dp"
         android:textColor="@color/black"
-        android:textSize="20dp"/>
+        android:textSize="20sp"/>
     <EditText
         android:layout_width="400dp"
         android:layout_height="wrap_content"
@@ -43,5 +44,6 @@
         android:onClick="ingresarCuenta"
         android:id="@+id/btnLogin"
         android:textColor="@color/white"
-        android:background="@drawable/selector_btn_login"/>
+        android:background="@drawable/selector_btn_login"
+        android:textSize="20dp"/>
 </LinearLayout>

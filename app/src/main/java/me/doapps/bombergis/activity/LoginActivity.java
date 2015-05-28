@@ -42,15 +42,11 @@ public class LoginActivity extends ActionBarActivity {
                 Intent intent = new Intent(this, DashboardActivity.class);
                 startActivity(intent);
             }
-
-
         }
         else {
             txtUser.requestFocus();
             Toast.makeText(this,"Correo no valido",Toast.LENGTH_SHORT).show();
-
         }
-
     }
 
     public final static boolean isValidEmail(CharSequence target) {
