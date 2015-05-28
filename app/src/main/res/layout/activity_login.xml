@@ -7,9 +7,9 @@
     android:background="@color/cream_can">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="70dp"
         android:text="@string/login"
-        android:textSize="50sp"
+        android:textSize="65sp"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_weight="0.07"
