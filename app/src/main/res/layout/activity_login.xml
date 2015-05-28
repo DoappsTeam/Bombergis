@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:weightSum="1"
     android:gravity="center"
-    android:background="@color/saffron">
+    android:background="@color/cream_can">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="45dp"
