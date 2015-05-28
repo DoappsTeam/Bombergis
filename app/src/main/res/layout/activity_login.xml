@@ -34,7 +34,7 @@
         android:id="@+id/txtPass"
         android:layout_marginTop="50dp"
         android:textColor="@color/black"
-        android:textSize="20dp"/>
+        android:textSize="20sp"/>
     <Button
         android:layout_width="200dp"
         android:layout_height="50dp"
@@ -45,5 +45,5 @@
         android:id="@+id/btnLogin"
         android:textColor="@color/white"
         android:background="@drawable/selector_btn_login"
-        android:textSize="20dp"/>
+        android:textSize="20sp"/>
 </LinearLayout>
