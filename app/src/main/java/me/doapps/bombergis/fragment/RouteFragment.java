@@ -35,6 +35,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+
         interfaceRoute.getRoute(txtOrigen.getText().toString());
     }
 

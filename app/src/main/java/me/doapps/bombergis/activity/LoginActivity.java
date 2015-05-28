@@ -1,5 +1,6 @@
 package me.doapps.bombergis.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
@@ -34,9 +35,16 @@ public class LoginActivity extends ActionBarActivity {
         if (isValidEmail(txtUser.getText().toString())){
             //Toast.makeText(this,"Correo válido",Toast.LENGTH_SHORT).show();
             /*Verificar contraseña*/
+            if(txtPass.getText().toString().length() < 6 || txtPass.getText().toString().equals("")){
 
-            //Intent i = new Intent(this, DashboardActivity.class);
-            //startActivity(i);
+                Toast.makeText(LoginActivity.this,"Ingrese minimo 6 caracteres", Toast.LENGTH_SHORT).show();
+
+            }else{
+                Intent intent = new Intent(this, DashboardActivity.class);
+                startActivity(intent);
+            }
+
+
         }
         else {
             Toast.makeText(this,"Correo no valido",Toast.LENGTH_SHORT).show();
