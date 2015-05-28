@@ -1,5 +1,7 @@
 package me.doapps.bombergis.activity;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -143,11 +145,17 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         map.animateCamera(camUpd3);
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
             case R.id.btnSearch:
+                btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search1));
+                btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest2));
+                btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps2));
+                btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route2));
+
                 SearchFragment searchFragment=new SearchFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.containerLayout, searchFragment)
@@ -161,6 +169,11 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 break;
 
             case R.id.btnInterest:
+                btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search2));
+                btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest1));
+                btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps2));
+                btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route2));
+
                 InterestFragment interestFragment = new InterestFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.containerLayout, interestFragment)
@@ -228,12 +241,22 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 break;
 
             case R.id.btnMaps:
+                btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search2));
+                btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest2));
+                btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps1));
+                btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route2));
+
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.containerLayout, new MapsFragment())
                         .commit();
                 break;
 
             case R.id.btnRoute:
+                btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search2));
+                btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest2));
+                btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps2));
+                btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route1));
+
                 RouteFragment routeFragment = new RouteFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.containerLayout,routeFragment)
