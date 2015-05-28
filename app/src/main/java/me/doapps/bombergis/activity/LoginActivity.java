@@ -36,9 +36,8 @@ public class LoginActivity extends ActionBarActivity {
             //Toast.makeText(this,"Correo válido",Toast.LENGTH_SHORT).show();
             /*Verificar contraseña*/
             if(txtPass.getText().toString().length() < 6 || txtPass.getText().toString().equals("")){
-
+                txtPass.requestFocus();
                 Toast.makeText(LoginActivity.this,"Ingrese minimo 6 caracteres", Toast.LENGTH_SHORT).show();
-
             }else{
                 Intent intent = new Intent(this, DashboardActivity.class);
                 startActivity(intent);
@@ -47,7 +46,9 @@ public class LoginActivity extends ActionBarActivity {
 
         }
         else {
+            txtUser.requestFocus();
             Toast.makeText(this,"Correo no valido",Toast.LENGTH_SHORT).show();
+
         }
 
     }
