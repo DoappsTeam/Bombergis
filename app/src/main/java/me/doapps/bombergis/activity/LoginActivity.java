@@ -1,11 +1,13 @@
 package me.doapps.bombergis.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import me.doapps.bombergis.R;
 
@@ -28,7 +30,21 @@ public class LoginActivity extends ActionBarActivity {
         btnLogin = (Button)findViewById(R.id.btnLogin);
     }
     public void ingresarCuenta(View view) {
-        Intent i = new Intent(this, DashboardActivity.class);
-        startActivity(i);
+
+        if (isValidEmail(txtUser.getText().toString())){
+            //Toast.makeText(this,"Correo válido",Toast.LENGTH_SHORT).show();
+            /*Verificar contraseña*/
+
+            //Intent i = new Intent(this, DashboardActivity.class);
+            //startActivity(i);
+        }
+        else {
+            Toast.makeText(this,"Correo no valido",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public final static boolean isValidEmail(CharSequence target) {
+        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 }
