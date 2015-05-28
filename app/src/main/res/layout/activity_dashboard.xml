@@ -14,23 +14,25 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="#AB1212"
+        android:background="@color/cream_can"
         android:layout_gravity="center_horizontal|bottom">
 
         <ImageButton
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/btnSearch"
+            android:layout_marginRight="30dp"
             android:src="@mipmap/ic_search"
-
+            android:background="@drawable/selector_btn_option"
             android:onClick="Search" />
 
         <ImageButton
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/btnInterest"
+            android:layout_marginRight="30dp"
             android:src="@mipmap/ic_interest"
-
+            android:background="@drawable/selector_btn_option"
             android:onClick="Interest"/>
 
         <ImageButton
@@ -38,7 +40,8 @@
             android:layout_height="100dp"
             android:id="@+id/btnMaps"
             android:src="@mipmap/ic_maps"
-
+            android:layout_marginRight="30dp"
+            android:background="@drawable/selector_btn_option"
             android:onClick="Maps"/>
 
         <ImageButton
@@ -46,7 +49,7 @@
             android:layout_height="100dp"
             android:id="@+id/btnRoute"
             android:src="@mipmap/ic_route"
-
+            android:background="@drawable/selector_btn_option"
             android:onClick="Route"/>
 
     </LinearLayout>
@@ -55,7 +58,7 @@
         android:id="@+id/containerLayout"
         android:orientation="vertical"
         android:layout_width="400dp"
-        android:background="#EE12EE"
+        android:background="#ffffff"
         android:layout_height="match_parent"
         android:layout_marginBottom="100dp"
         android:layout_gravity="right|top">
