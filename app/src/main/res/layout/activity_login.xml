@@ -2,19 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="40dp"
-    android:layout_margin="100dp"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:gravity="center">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:text="@string/login"
-        android:textSize="40dp"
+        android:textSize="50dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_weight="0.07" />
+        android:layout_weight="0.07"
+        android:layout_marginBottom="50dp"
+        android:textStyle="bold"/>
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:hint="@string/usuario"
@@ -24,7 +25,7 @@
         android:textColor="@color/black"
         android:textSize="20dp"/>
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="@string/contraseña"
@@ -36,9 +37,11 @@
     <Button
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="70dp"
         android:text="@string/ingresar"
         android:layout_gravity="center"
         android:onClick="ingresarCuenta"
-        android:id="@+id/btnLogin"/>
+        android:id="@+id/btnLogin"
+        android:textColor="@color/white"
+        android:background="@drawable/selector_btn_login"/>
 </LinearLayout>
