@@ -24,7 +24,7 @@ public class MapsFragment extends Fragment {
     RadioButton radioMapsHibrido;
 
     private InterfaceChangeMaps interfaceChangeMaps;
-
+    static int stateMaps = 1;
 
     public MapsFragment() {
     }
@@ -37,7 +37,12 @@ public class MapsFragment extends Fragment {
         radioMapsNormal = (RadioButton) view.findViewById(R.id.radioMapsNormal);
         radioMapsSatelital = (RadioButton) view.findViewById(R.id.radioMapsSatelital);
         radioMapsHibrido = (RadioButton) view.findViewById(R.id.radioMapsHibrido);
-        return view;
+
+        if(stateMaps == 1){radioMaps.check(R.id.radioMapsNormal);}
+        if(stateMaps == 2){radioMaps.check(R.id.radioMapsSatelital);}
+        if(stateMaps == 3){radioMaps.check(R.id.radioMapsHibrido);}
+
+         return view;
     }
 
     @Override
@@ -50,15 +55,18 @@ public class MapsFragment extends Fragment {
           public void onCheckedChanged(RadioGroup group, int checkedId) {
             switch (checkedId) {
                 case R.id.radioMapsNormal:
-                    interfaceChangeMaps.getMaps(1);
+                    stateMaps = 1;
+                    interfaceChangeMaps.getMaps(stateMaps);
                     //Toast.makeText(getActivity(), "soy normal", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.radioMapsSatelital:
-                    interfaceChangeMaps.getMaps(2);
+                    stateMaps = 2;
+                    interfaceChangeMaps.getMaps(stateMaps);
                     //Toast.makeText(getActivity(), "soy satelital", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.radioMapsHibrido:
-                    interfaceChangeMaps.getMaps(3);
+                    stateMaps = 3;
+                    interfaceChangeMaps.getMaps(stateMaps);
                     //Toast.makeText(getActivity(), "soy hibrido", Toast.LENGTH_SHORT).show();
                     break;
                     default:

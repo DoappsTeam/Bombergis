@@ -31,6 +31,7 @@ import me.doapps.bombergis.fragment.SearchFragment;
  * Created by user on 27/05/2015.
  */
 public class DashboardActivity extends ActionBarActivity implements View.OnClickListener {
+    MapsFragment mapsFragment;// = new MapsFragment();
     private ImageButton btnSearch;
     private ImageButton btnInterest;
     private ImageButton btnMaps;
@@ -43,6 +44,8 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     private List<LatLng> bomberos;
     private List<LatLng> grifos;
     private List<LatLng> comisarias;
+
+    static int stateMapsDashboard = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
 
         btnRoute = (ImageButton) findViewById(R.id.btnRoute);
         btnRoute.setOnClickListener(this);
-        btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search2));
+
 /*agregamos hospitales*/
         hospitales = new ArrayList<>();
         hospitales.add(new LatLng(-12.101524, -77.021626));
@@ -128,7 +131,11 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
 
     private void setUpMap() {
         map.setMyLocationEnabled(true);
-        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        if(stateMapsDashboard == 1){map.setMapType(GoogleMap.MAP_TYPE_NORMAL);}
+        if(stateMapsDashboard == 2){map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);}
+        if(stateMapsDashboard == 3){map.setMapType(GoogleMap.MAP_TYPE_HYBRID);}
+
         map.getUiSettings().setZoomControlsEnabled(true);
         //mapSettings = map.getUiSettings();
         map.getUiSettings().setScrollGesturesEnabled(true);
@@ -148,6 +155,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onClick(View v) {
+        mapsFragment = new MapsFragment();
 
         switch (v.getId()) {
             case R.id.btnSearch:
@@ -163,9 +171,10 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 searchFragment.setInterfaceSearch(new SearchFragment.InterfaceSearch() {
                     @Override
                     public void getAddress(String address) {
-                        Toast.makeText(DashboardActivity.this,address,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DashboardActivity.this, address, Toast.LENGTH_SHORT).show();
                     }
                 });
+
                 break;
 
             case R.id.btnInterest:
@@ -232,10 +241,6 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                                         .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_policestation)));
                             }
                         }
-
-
-
-
                     }
                 });
                 break;
@@ -246,7 +251,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps2));
                 btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route));
 
-                MapsFragment mapsFragment = new MapsFragment();
+
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.containerLayout, mapsFragment)
                         .commit();
@@ -256,14 +261,17 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                     public void getMaps(int flag) {
                         if(flag == 1){
                             map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                            stateMapsDashboard = 1;
                         }
 
                         if(flag == 2){
                             map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                            stateMapsDashboard = 2;
                         }
 
                         if(flag == 3){
                             map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                            stateMapsDashboard = 3;
                         }
                     }
                 });
