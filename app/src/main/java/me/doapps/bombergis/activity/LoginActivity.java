@@ -34,6 +34,7 @@ public class LoginActivity extends ActionBarActivity {
         if(sessionManager.getUserLogin()){
             Intent intent = new Intent(this, DashboardActivity.class);
             startActivity(intent);
+            finish();
         }
 
 
@@ -55,6 +56,7 @@ public class LoginActivity extends ActionBarActivity {
                 sessionManager.setUserPass(txtPass.getText().toString());
                 Intent intent = new Intent(this, DashboardActivity.class);
                 startActivity(intent);
+                finish();
             }
         }
         else {
