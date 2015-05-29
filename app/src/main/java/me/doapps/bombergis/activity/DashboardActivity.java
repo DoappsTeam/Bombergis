@@ -64,7 +64,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
 
         btnRoute = (ImageButton) findViewById(R.id.btnRoute);
         btnRoute.setOnClickListener(this);
-
+        btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search2));
 /*agregamos hospitales*/
         hospitales = new ArrayList<>();
         hospitales.add(new LatLng(-12.101524, -77.021626));
