@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import me.doapps.bombergis.R;
+import me.doapps.bombergis.session.SessionManager;
 
 /**
  * Created by MiguelGarrafa_2 on 27/05/2015.
@@ -22,10 +23,19 @@ public class LoginActivity extends ActionBarActivity {
     TextView txtPass;
     Button btnLogin;
 
+    private SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        sessionManager = new SessionManager(LoginActivity.this);
+        if(sessionManager.getUserLogin()){
+            Intent intent = new Intent(this, DashboardActivity.class);
+            startActivity(intent);
+        }
+
 
         txtUser = (TextView)findViewById(R.id.txtUser);
         txtPass = (TextView)findViewById(R.id.txtPass);
@@ -40,6 +50,9 @@ public class LoginActivity extends ActionBarActivity {
                 txtPass.requestFocus();
                 Toast.makeText(LoginActivity.this,"Ingrese minimo 6 caracteres", Toast.LENGTH_SHORT).show();
             }else{
+                sessionManager.setUserLogin(true);
+                sessionManager.setUserEmail(txtPass.getText().toString());
+                sessionManager.setUserPass(txtPass.getText().toString());
                 Intent intent = new Intent(this, DashboardActivity.class);
                 startActivity(intent);
             }
