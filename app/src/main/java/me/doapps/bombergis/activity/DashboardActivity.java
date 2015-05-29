@@ -31,7 +31,7 @@ import me.doapps.bombergis.fragment.SearchFragment;
  * Created by user on 27/05/2015.
  */
 public class DashboardActivity extends ActionBarActivity implements View.OnClickListener {
-    MapsFragment mapsFragment;// = new MapsFragment();
+
     private ImageButton btnSearch;
     private ImageButton btnInterest;
     private ImageButton btnMaps;
@@ -155,7 +155,6 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onClick(View v) {
-        mapsFragment = new MapsFragment();
 
         switch (v.getId()) {
             case R.id.btnSearch:
@@ -251,7 +250,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps2));
                 btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route));
 
-
+                MapsFragment mapsFragment = new MapsFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.containerLayout, mapsFragment)
                         .commit();
