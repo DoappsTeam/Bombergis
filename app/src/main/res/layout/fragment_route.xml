@@ -11,15 +11,17 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Ruta"
         android:textColor="#000000"
-        android:textSize="30dp"
+        android:textSize="35dp"
         android:textStyle="bold"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
     >
     <LinearLayout
     android:orientation="horizontal"
     android:layout_marginTop="30dp"
     android:layout_width="match_parent"
     android:layout_height="50dp">
+
     <TextView
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -27,7 +29,7 @@
         android:text="De:"
         android:layout_marginTop="9dp"
         android:textColor="#000000"
-        android:textSize="15dp"
+        android:textSize="20sp"
         android:textStyle="bold" />
     >
     <EditText
@@ -43,23 +45,23 @@
         android:orientation="horizontal"
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="100dp">
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Hasta:"
             android:textColor="#000000"
-            android:textSize="15dp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginTop="15dp"/>
         >
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_below="@+id/txtDestino"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20sp"
             android:textColor="#ffffff"
             android:textSize="20dp"/>
 
@@ -68,7 +70,7 @@
     <Button
         android:id="@+id/btnBscRuta"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:background="@drawable/selector_btn_login"
