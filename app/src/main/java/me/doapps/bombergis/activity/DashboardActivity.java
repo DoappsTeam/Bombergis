@@ -151,10 +151,10 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
 
         switch (v.getId()) {
             case R.id.btnSearch:
-                btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search1));
-                btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest2));
-                btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps2));
-                btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route2));
+                btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search2));
+                btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest));
+                btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps));
+                btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route));
 
                 SearchFragment searchFragment=new SearchFragment();
                 getSupportFragmentManager().beginTransaction()
@@ -169,10 +169,10 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 break;
 
             case R.id.btnInterest:
-                btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search2));
-                btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest1));
-                btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps2));
-                btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route2));
+                btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search));
+                btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest2));
+                btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps));
+                btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route));
 
                 InterestFragment interestFragment = new InterestFragment();
                 getSupportFragmentManager().beginTransaction()
@@ -241,10 +241,10 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 break;
 
             case R.id.btnMaps:
-                btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search2));
-                btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest2));
-                btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps1));
-                btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route2));
+                btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search));
+                btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest));
+                btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps2));
+                btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route));
 
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.containerLayout, new MapsFragment())
@@ -252,10 +252,10 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 break;
 
             case R.id.btnRoute:
-                btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search2));
-                btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest2));
-                btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps2));
-                btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route1));
+                btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search));
+                btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest));
+                btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps));
+                btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route2));
 
                 RouteFragment routeFragment = new RouteFragment();
                 getSupportFragmentManager().beginTransaction()
