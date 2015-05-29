@@ -24,13 +24,14 @@ public class InterestFragment extends Fragment {
     private CheckBox checkHospitales;
     private InterfaceInstitutes interfaceInstitutes;
 
+
     /* Estado de los botones*/
-    int stateHospitales = 0;
-    int stateColegios = 0;
-    int stateHidrantes = 0;
-    int stateBomberos = 0;
-    int stateGrifos = 0;
-    int stateComisarias = 0;
+    static int stateHospitales = 0;
+    static int stateColegios = 0;
+    static int stateHidrantes = 0;
+    static int stateBomberos = 0;
+    static int stateGrifos = 0;
+    static int stateComisarias = 0;
 
     public InterestFragment(){}
 
@@ -44,6 +45,13 @@ public class InterestFragment extends Fragment {
         checkGrifos = (CheckBox) view.findViewById(R.id.checkGrifos);
         checkBomberos = (CheckBox) view.findViewById(R.id.checkBomberos);
         checkHospitales = (CheckBox) view.findViewById(R.id.checkHospitales);
+
+        if(stateHospitales == 1){checkHospitales.setChecked(true);}
+        if(stateBomberos == 1){checkBomberos.setChecked(true);}
+        if(stateGrifos == 1){checkGrifos.setChecked(true);}
+        if(stateComisarias == 1){checkComisarias.setChecked(true);}
+        if(stateColegios == 1){checkColegios.setChecked(true);}
+        if(stateHidrantes == 1){checkHidrantes.setChecked(true);}
         return view;
     }
 
@@ -102,7 +110,8 @@ public class InterestFragment extends Fragment {
         checkComisarias.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){stateComisarias = 1;}
+                if (isChecked){stateComisarias = 1;
+                }
                 else{stateComisarias = 0;}
                 interfaceInstitutes.getInstitute(stateHospitales,stateColegios,stateHidrantes,stateBomberos,stateGrifos,stateComisarias);
             }
