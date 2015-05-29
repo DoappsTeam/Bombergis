@@ -246,9 +246,28 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps2));
                 btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route));
 
+                MapsFragment mapsFragment = new MapsFragment();
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.containerLayout, new MapsFragment())
+                        .replace(R.id.containerLayout, mapsFragment)
                         .commit();
+
+                mapsFragment.setInterfaceChangeMaps(new MapsFragment.InterfaceChangeMaps() {
+                    @Override
+                    public void getMaps(int flag) {
+                        if(flag == 1){
+                            map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                        }
+
+                        if(flag == 2){
+                            map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                        }
+
+                        if(flag == 3){
+                            map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                        }
+                    }
+                });
+
                 break;
 
             case R.id.btnRoute:
