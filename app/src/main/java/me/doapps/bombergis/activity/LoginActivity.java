@@ -37,7 +37,6 @@ public class LoginActivity extends ActionBarActivity {
             finish();
         }
 
-
         txtUser = (TextView)findViewById(R.id.txtUser);
         txtPass = (TextView)findViewById(R.id.txtPass);
         btnLogin = (Button)findViewById(R.id.btnLogin);
