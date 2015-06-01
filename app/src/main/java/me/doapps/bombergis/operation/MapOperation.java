@@ -1,6 +1,7 @@
 package me.doapps.bombergis.operation;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -22,8 +23,8 @@ public class MapOperation {
     public void getReferences(String input){
         RequestParams params = new RequestParams();
         params.put("input", input);
-        params.put("sensor", R.string.sensor);
-        params.put("key", R.string.browser_key);
+        params.put("sensor", "false");
+        params.put("key", "AIzaSyB7X6vhRYIoAzZWhIP_Tr05wx-q8ajslWg");
         params.put("components", "country:pe");
 
         AsyncHttpClient client = new AsyncHttpClient();
@@ -31,13 +32,14 @@ public class MapOperation {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                Log.e("EXITO", response.toString());
+
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
-                Toast.makeText(context, responseString, Toast.LENGTH_SHORT).show();
+               Log.e("FALLA", responseString);
             }
         });
     }

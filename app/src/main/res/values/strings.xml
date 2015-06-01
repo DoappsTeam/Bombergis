@@ -12,7 +12,7 @@
 
     <!-- Web services -->
     <string name="sensor">false</string>
-    <string name="browser_key">AIzaSyB7X6vhRYIoAzZWhIP_Tr05wx</string>
+    <string name="browser_key">AIzaSyB7X6vhRYIoAzZWhIP_Tr05wx-q8ajslWg</string>
     <string name="components">country:pe</string>
 
 </resources>

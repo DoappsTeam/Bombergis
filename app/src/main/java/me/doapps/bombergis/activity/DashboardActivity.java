@@ -75,8 +75,8 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         searchFragment.setInterfaceSearch(new SearchFragment.InterfaceSearch() {
             @Override
             public void getAddress(String address) {
-                //MapOperation mapOperation = new MapOperation();
-                //mapOperation.getReferences(address);
+                MapOperation mapOperation = new MapOperation();
+                mapOperation.getReferences(address);
                 Toast.makeText(DashboardActivity.this, address, Toast.LENGTH_SHORT).show();
             }
         });
