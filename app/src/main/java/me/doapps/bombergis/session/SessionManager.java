@@ -36,13 +36,16 @@ public class SessionManager {
         editor.putString(USER_EMAIL, userEmail);
         editor.commit();
     }
+
     public String getUserEmail(){
         return preferences.getString(USER_EMAIL, null);
     }
+
     public void setUserPass(String userPass){
         editor.putString(USER_PASS, userPass);
         editor.commit();
     }
+
     public String getUserPass(){
      return preferences.getString(USER_PASS,null);
     }

@@ -20,9 +20,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:hint="Ingrese Dirección"
-        android:ems="10"
         android:id="@+id/txtAddress"
         android:layout_below="@+id/lblLogin"
         android:layout_alignLeft="@+id/txtPass"
