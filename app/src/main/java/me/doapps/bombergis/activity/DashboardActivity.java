@@ -274,6 +274,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     }
 
     private void loadMarkers() {
+
         /*agregamos hospitales*/
         hospitales = new ArrayList<>();
         hospitales.add(new LatLng(-12.101524, -77.021626));
