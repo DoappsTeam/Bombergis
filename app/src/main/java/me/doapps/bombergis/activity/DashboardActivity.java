@@ -16,6 +16,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -49,6 +50,9 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     static int stateMapsDashboard = 1;
     private SearchFragment searchFragment;
     private MapOperation mapOperation;
+    CameraPosition camPos;
+    CameraUpdate camUpd3;
+    Marker marker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,9 +212,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                     }
                 });
                 break;
-
         }
-
     }
 
     /**
@@ -244,13 +246,11 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         map.getUiSettings().setTiltGesturesEnabled(true);
         map.getUiSettings().setRotateGesturesEnabled(true);
 
-        /*Marker marker = map.addMarker(new MarkerOptions().position(new LatLng(-12.1023776, -77.0219219)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));*/
-
-        CameraPosition camPos = new CameraPosition.Builder()
+        camPos = new CameraPosition.Builder()
                 .target(new LatLng(-12.1023776, -77.0219219))
                 .zoom(16)
                 .build();
-        CameraUpdate camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
+        camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
         map.animateCamera(camUpd3);
     }
 
@@ -263,10 +263,30 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 Log.e("address", address);
                 mapOperation = new MapOperation();
                 mapOperation.getReferences(address);
-                mapOperation.setInterfaceTest(new MapOperation.InterfaceTest() {
+                mapOperation.setInterfaceReference(new MapOperation.InterfaceReference() {
                     @Override
-                    public void getResponse(String x) {
-                        Log.e("json response", x);
+                    public void getResponse(String x, String y) {
+                        if(x.equals("OK")){
+                            Log.e("REF:",y);
+                            mapOperation.getLocation(y);
+                            mapOperation.setInterfaceLocation(new MapOperation.InterfaceLocation() {
+                                @Override
+                                public void getLocation(String status, Double lat, Double lng) {
+                                    if(status.equals("OK")){
+                                        marker = map.addMarker(new MarkerOptions()
+                                                .position(new LatLng(lat, lng))
+                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+
+                                        camPos = new CameraPosition.Builder()
+                                                .target(new LatLng(lat, lng))
+                                                .zoom(16)
+                                                .build();
+                                        camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
+                                        map.animateCamera(camUpd3);
+                                    }
+                                }
+                            });
+                        }
                     }
                 });
             }

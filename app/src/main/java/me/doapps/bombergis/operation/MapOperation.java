@@ -31,7 +31,8 @@ public class MapOperation {
     private String var;
     private GoogleMap mMap;
 
-    private InterfaceTest interfaceTest;
+    private InterfaceReference interfaceReference;
+    private InterfaceLocation interfaceLocation;
 
     public void getReferences(String input) {
         final RequestParams params = new RequestParams();
@@ -46,7 +47,11 @@ public class MapOperation {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 Log.e("response success", response.toString());
-                interfaceTest.getResponse(response.toString());
+                try {
+                    interfaceReference.getResponse(response.get("status").toString(),response.getJSONArray("predictions").getJSONObject(0).getString("reference"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -57,10 +62,10 @@ public class MapOperation {
         });
     }
 
-    public void getLocation(String input1) {
+    public void getLocation(String reference) {
 
         final RequestParams params = new RequestParams();
-        params.put("reference", input1);
+        params.put("reference", reference);
         params.put("sensor", "false");
         params.put("key", "AIzaSyB7X6vhRYIoAzZWhIP_Tr05wx-q8ajslWg");
 
@@ -70,8 +75,7 @@ public class MapOperation {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
-                    Log.e("Latitud", response.getJSONObject("result").getJSONObject("geometry").getJSONObject("location").getString("lat"));
-                    Log.e("Altitud", response.getJSONObject("result").getJSONObject("geometry").getJSONObject("location").getString("lng"));
+                    interfaceLocation.getLocation(response.getString("status"),response.getJSONObject("result").getJSONObject("geometry").getJSONObject("location").getDouble("lat"),response.getJSONObject("result").getJSONObject("geometry").getJSONObject("location").getDouble("lng"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -86,10 +90,18 @@ public class MapOperation {
     }
 
     /**Interfaces**/
-    public interface InterfaceTest{
-        void getResponse(String x);
+    public interface InterfaceReference{
+        void getResponse(String x, String y);
     }
-    public void setInterfaceTest(InterfaceTest interfaceTest){
-        this.interfaceTest = interfaceTest;
+    public void setInterfaceReference(InterfaceReference interfaceReference){
+        this.interfaceReference = interfaceReference;
+    }
+
+    public interface InterfaceLocation{
+        void getLocation(String status, Double lat, Double lng);
+    }
+
+    public void setInterfaceLocation(InterfaceLocation interfaceLocation){
+        this.interfaceLocation = interfaceLocation;
     }
 }
