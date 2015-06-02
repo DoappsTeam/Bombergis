@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -20,6 +22,9 @@ public class RouteFragment extends Fragment implements View.OnClickListener{
     private InterfaceRoute interfaceRoute;
     private EditText txtOrigen;
     private EditText txtDestino;
+    private AutoCompleteTextView autoCompleteTextView;
+    String[] arr = { "Paries,France", "PA,United States","Parana,Brazil", "Padua,Italy", "Pasadena,CA,United States"};
+    ArrayAdapter<String> adapter;
     public RouteFragment(){}
 
     @Nullable
@@ -30,6 +35,14 @@ public class RouteFragment extends Fragment implements View.OnClickListener{
         btnBscRuta2 = (Button)view.findViewById(R.id.btnBscRuta2);
         txtOrigen = (EditText)view.findViewById(R.id.txtOrigen);
         txtDestino = (EditText)view.findViewById(R.id.txtDestino);
+       /* autoCompleteTextView = (AutoCompleteTextView)view.findViewById(R.id.autoCompleteTextView);
+
+        adapter = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item, arr);
+
+        autoCompleteTextView.setThreshold(2);
+        autoCompleteTextView.setAdapter(adapter);/*/
+
         return view;
     }
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
@@ -41,7 +54,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnBscRuta){interfaceRoute.getRoute(1,txtOrigen.getText().toString());}
-        if(v.getId() == R.id.btnBscRuta2){interfaceRoute.getRoute(2,txtDestino.getText().toString());}
+        if(v.getId() == R.id.btnBscRuta2){interfaceRoute.getRoute(2, txtDestino.getText().toString());}
 
     }
 

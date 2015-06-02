@@ -301,7 +301,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
             @Override
             public void getRoute(int s, String ruta) {
                 if(s == 1){
-
+                    map.clear();
                     mapOperation = new MapOperation();
                     mapOperation.getReferences(ruta);
                     mapOperation.setInterfaceReference(new MapOperation.InterfaceReference() {
@@ -332,7 +332,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 }
 
                 if(s == 2){
-
+                    //map.clear();
                     mapOperation = new MapOperation();
                     mapOperation.getReferences(ruta);
                     mapOperation.setInterfaceReference(new MapOperation.InterfaceReference() {
