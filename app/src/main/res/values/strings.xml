@@ -2,7 +2,7 @@
     <!-- General Strings -->
     <string name="app_name">Bombergis</string>
     <string name="title_item_detail">Item Detail</string>
-    <string name="google_maps_key">AIzaSyALBowNDJOV730W9PJ-Jt6qBAjDIeKgeWA</string>}}
+    <string name="google_maps_key">AIzaSyBn7ckILkPRn4yQvVRS1u4GgHCjOnRVhSw</string>}}
 
     <!-- Login Activity -->
     <string name="login">Login</string>
@@ -12,7 +12,7 @@
 
     <!-- Web services -->
     <string name="sensor">false</string>
-    <string name="browser_key">AIzaSyB7X6vhRYIoAzZWhIP_Tr05wx-q8ajslWg</string>
+    <string name="browser_key">AIzaSyAsAFJNRMzPJ3LeRjbC_MDJK1GiBDSwNX4</string>
     <string name="components">country:pe</string>
 
 </resources>

@@ -22,7 +22,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     private Button btnBuscar;
     private InterfaceSearch interfaceSearch;
     private EditText txtAddress;
-
     private String data = "";
 
     public SearchFragment() {
@@ -48,19 +47,16 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         interfaceSearch.getAddress(txtAddress.getText().toString());
-       /* try {
-
-        }catch (Exception e){
-            Log.e("exception getAdress", e.toString());
-        }*/
-
     }
 
+
+    /**Interfaces**/
     public interface InterfaceSearch {
         void getAddress(String address);
     }
-
     public void setInterfaceSearch(InterfaceSearch interfaceSearch) {
         this.interfaceSearch = interfaceSearch;
     }
+
+
 }
