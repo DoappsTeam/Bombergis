@@ -44,7 +44,8 @@ public class LoginActivity extends ActionBarActivity {
     public void ingresarCuenta(View view) {
 
         if (isValidEmail(txtUser.getText().toString())){
-            //Toast.makeText(this,"Correo válido",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this,"Correo v
+            // álido",Toast.LENGTH_SHORT).show();
             /*Verificar contraseña*/
             if(txtPass.getText().toString().length() < 6 || txtPass.getText().toString().equals("")){
                 txtPass.requestFocus();

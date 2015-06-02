@@ -16,6 +16,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -49,10 +50,17 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
 
     static int stateMapsDashboard = 1;
     private SearchFragment searchFragment;
+    private RouteFragment routeFragment;
     private MapOperation mapOperation;
     CameraPosition camPos;
     CameraUpdate camUpd3;
     Marker marker;
+    Double latI ;
+    Double lngI;
+    Double latD ;
+    Double lngD;
+    Double latP ;
+    Double lngP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,16 +209,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps));
                 btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route2));
 
-                RouteFragment routeFragment = new RouteFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.containerLayout, routeFragment)
-                        .commit();
-                routeFragment.setInterfaceRoute(new RouteFragment.InterfaceRoute() {
-                    @Override
-                    public void getRoute(String route) {
-                        Toast.makeText(DashboardActivity.this, route, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                initRouteFragment();
                 break;
         }
     }
@@ -266,13 +265,13 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 mapOperation.setInterfaceReference(new MapOperation.InterfaceReference() {
                     @Override
                     public void getResponse(String x, String y) {
-                        if(x.equals("OK")){
-                            Log.e("REF:",y);
+                        if (x.equals("OK")) {
+                            Log.e("REF:", y);
                             mapOperation.getLocation(y);
                             mapOperation.setInterfaceLocation(new MapOperation.InterfaceLocation() {
                                 @Override
                                 public void getLocation(String status, Double lat, Double lng) {
-                                    if(status.equals("OK")){
+                                    if (status.equals("OK")) {
                                         marker = map.addMarker(new MarkerOptions()
                                                 .position(new LatLng(lat, lng))
                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
@@ -289,6 +288,79 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                         }
                     }
                 });
+            }
+        });
+    }
+
+    private void initRouteFragment(){
+        routeFragment = new RouteFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.containerLayout, routeFragment)
+                .commit();
+        routeFragment.setInterfaceRoute(new RouteFragment.InterfaceRoute() {
+            @Override
+            public void getRoute(int s, String ruta) {
+                if(s == 1){
+
+                    mapOperation = new MapOperation();
+                    mapOperation.getReferences(ruta);
+                    mapOperation.setInterfaceReference(new MapOperation.InterfaceReference() {
+                        @Override
+                        public void getResponse(String status, String reference) {
+                            if(status.equals("OK")){
+                                mapOperation.getLocation(reference);
+                                mapOperation.setInterfaceLocation(new MapOperation.InterfaceLocation() {
+                                    @Override
+                                    public void getLocation(String status, Double lat, Double lng) {
+                                        if (status.equals("OK")) {
+                                            marker = map.addMarker(new MarkerOptions()
+                                                    .position(new LatLng(lat, lng))
+                                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+
+                                            camPos = new CameraPosition.Builder()
+                                                    .target(new LatLng(lat, lng))
+                                                    .zoom(16)
+                                                    .build();
+                                            camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
+                                            map.animateCamera(camUpd3);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+
+                if(s == 2){
+
+                    mapOperation = new MapOperation();
+                    mapOperation.getReferences(ruta);
+                    mapOperation.setInterfaceReference(new MapOperation.InterfaceReference() {
+                        @Override
+                        public void getResponse(String status, String reference) {
+                            if(status.equals("OK")){
+                                mapOperation.getLocation(reference);
+                                mapOperation.setInterfaceLocation(new MapOperation.InterfaceLocation() {
+                                    @Override
+                                    public void getLocation(String status, Double lat, Double lng) {
+                                        if (status.equals("OK")) {
+                                            marker = map.addMarker(new MarkerOptions()
+                                                    .position(new LatLng(lat, lng))
+                                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+
+                                            camPos = new CameraPosition.Builder()
+                                                    .target(new LatLng(lat, lng))
+                                                    .zoom(16)
+                                                    .build();
+                                            camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
+                                            map.animateCamera(camUpd3);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
             }
         });
     }

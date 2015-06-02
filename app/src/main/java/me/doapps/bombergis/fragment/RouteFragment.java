@@ -16,32 +16,41 @@ import me.doapps.bombergis.R;
  */
 public class RouteFragment extends Fragment implements View.OnClickListener{
     private Button btnBscRuta;
+    private Button btnBscRuta2;
     private InterfaceRoute interfaceRoute;
     private EditText txtOrigen;
+    private EditText txtDestino;
     public RouteFragment(){}
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_route, container, false);
-        btnBscRuta=(Button)view.findViewById(R.id.btnBscRuta);
-        txtOrigen=(EditText)view.findViewById(R.id.txtOrigen);
+        btnBscRuta = (Button)view.findViewById(R.id.btnBscRuta);
+        btnBscRuta2 = (Button)view.findViewById(R.id.btnBscRuta2);
+        txtOrigen = (EditText)view.findViewById(R.id.txtOrigen);
+        txtDestino = (EditText)view.findViewById(R.id.txtDestino);
         return view;
     }
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
         btnBscRuta.setOnClickListener(this);
+        btnBscRuta2.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        interfaceRoute.getRoute(txtOrigen.getText().toString());
+        if(v.getId() == R.id.btnBscRuta){interfaceRoute.getRoute(1,txtOrigen.getText().toString());}
+        if(v.getId() == R.id.btnBscRuta2){interfaceRoute.getRoute(2,txtDestino.getText().toString());}
+
     }
 
+    /** Interference **/
     public interface InterfaceRoute{
-        void getRoute(String route);
+        void getRoute(int s, String ruta);
     }
     public void setInterfaceRoute(InterfaceRoute interfaceRoute){
         this.interfaceRoute=interfaceRoute;
     }
+
 }

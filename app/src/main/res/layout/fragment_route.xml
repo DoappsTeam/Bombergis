@@ -36,8 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/txtOrigen"
-        android:textColor="#ffffff"
-        android:textSize="20dp"/>
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
 
 
 </LinearLayout>
@@ -59,11 +59,11 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@+id/txtDestino"
+            android:id="@+id/txtDestino"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20sp"
-            android:textColor="#ffffff"
-            android:textSize="20dp"/>
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
 
 
     </LinearLayout>
@@ -77,5 +77,16 @@
         android:textColor="@color/white"
         android:text="Buscar Ruta"
         android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/btnBscRuta2"
+        android:layout_gravity="center"
+        android:layout_marginTop="35dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/selector_btn_login"
+        android:textColor="@color/white"
+        android:text="Buscar Ruta2"
+        android:textSize="20sp"/>
 
 </LinearLayout>

@@ -91,7 +91,7 @@ public class MapOperation {
 
     /**Interfaces**/
     public interface InterfaceReference{
-        void getResponse(String x, String y);
+        void getResponse(String status, String reference);
     }
     public void setInterfaceReference(InterfaceReference interfaceReference){
         this.interfaceReference = interfaceReference;
