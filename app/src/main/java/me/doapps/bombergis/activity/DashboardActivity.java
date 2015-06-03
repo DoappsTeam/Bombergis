@@ -426,5 +426,6 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     }
     private void drawPolilyne(PolylineOptions options){
         Polyline polyline=map.addPolyline(options);
+
     }
 }

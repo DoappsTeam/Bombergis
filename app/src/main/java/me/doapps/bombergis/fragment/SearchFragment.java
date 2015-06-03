@@ -55,7 +55,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+    /**adaptar la baraja de opciones en la edittext osea que se despliegue las opciones**/
         txtAddress.setAdapter(new AutoCompleteAdapter(getActivity(),R.layout.item_list));
         txtAddress.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
