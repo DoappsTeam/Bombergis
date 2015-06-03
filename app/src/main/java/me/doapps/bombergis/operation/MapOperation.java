@@ -48,7 +48,7 @@ public class MapOperation {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                Log.e("response success", response.toString());
+                //Log.e("response success", response.toString());
                 try {
                     if(response.getString("status").equals("OK")){
                         interfacePredictions.getArrayPrediction(response.getString("status"),response.getJSONArray("predictions"));

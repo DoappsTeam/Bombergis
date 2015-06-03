@@ -57,7 +57,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener{
         autoCompleteOrigen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.e("seleccionado", resultList.get(i));
+                Log.e("Lugar - Reference", resultList.get(i)+"--"+referenceList.get(i));
             }
         });
 
@@ -65,7 +65,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener{
         autoCompleteDestino.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.e("seleccionado", resultList.get(i));
+                Log.e("Lugar - Reference", resultList.get(i)+"--"+referenceList.get(i));
             }
         });
 
@@ -104,6 +104,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener{
         });
         return resultList;
     }
+
 
     /**Adapter interno**/
     public class AutoCompleteAdapter extends ArrayAdapter<String> implements Filterable {
