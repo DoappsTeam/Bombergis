@@ -19,6 +19,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -300,23 +302,29 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         routeFragment.setInterfaceRoute(new RouteFragment.InterfaceRoute() {
             @Override
             public void getRoute(int s, String ruta) {
-                if(s == 1){
+                if (s == 1) {
                     map.clear();
                     mapOperation = new MapOperation();
                     mapOperation.getReferences(ruta);
                     mapOperation.setInterfaceReference(new MapOperation.InterfaceReference() {
                         @Override
                         public void getResponse(String status, String reference) {
-                            if(status.equals("OK")){
+                            if (status.equals("OK")) {
                                 mapOperation.getLocation(reference);
                                 mapOperation.setInterfaceLocation(new MapOperation.InterfaceLocation() {
                                     @Override
                                     public void getLocation(String status, Double lat, Double lng) {
                                         if (status.equals("OK")) {
+                                            /**Marker myMaker = map.addMarker(new MarkerOptions()
+                                                    .position(Posiciones.posiciones)
+                                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                                            drawPolilyne(Posiciones.polilinea);*/
                                             marker = map.addMarker(new MarkerOptions()
                                                     .position(new LatLng(lat, lng))
                                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-
+                                                    drawPolilyne(new PolylineOptions()
+                                                            .add(new LatLng(-12.1023776,-77.0219219))
+                                                            .add(new LatLng(lat, lng)));
                                             camPos = new CameraPosition.Builder()
                                                     .target(new LatLng(lat, lng))
                                                     .zoom(16)
@@ -331,14 +339,14 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                     });
                 }
 
-                if(s == 2){
+                if (s == 2) {
                     //map.clear();
                     mapOperation = new MapOperation();
                     mapOperation.getReferences(ruta);
                     mapOperation.setInterfaceReference(new MapOperation.InterfaceReference() {
                         @Override
                         public void getResponse(String status, String reference) {
-                            if(status.equals("OK")){
+                            if (status.equals("OK")) {
                                 mapOperation.getLocation(reference);
                                 mapOperation.setInterfaceLocation(new MapOperation.InterfaceLocation() {
                                     @Override
@@ -415,5 +423,8 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         comisarias.add(new LatLng(-12.076243, -77.076254));
         comisarias.add(new LatLng(-12.076262, -77.052466));
         comisarias.add(new LatLng(-12.097624, -77.087343));
+    }
+    private void drawPolilyne(PolylineOptions options){
+        Polyline polyline=map.addPolyline(options);
     }
 }
