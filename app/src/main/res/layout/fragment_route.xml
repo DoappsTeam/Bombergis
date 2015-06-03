@@ -32,12 +32,15 @@
         android:textSize="20sp"
         android:textStyle="bold" />
     >
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/txtOrigen"
-        android:textColor="@color/black"
-        android:textSize="20sp"/>
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteOrigen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/Origin"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
 
 
 </LinearLayout>
@@ -56,21 +59,21 @@
             android:textStyle="bold"
             android:layout_marginTop="15dp"/>
         >
-        <EditText
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteDestino"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/txtDestino"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20sp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/destination"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textSize="20sp"/>
-
 
     </LinearLayout>
     <Button
         android:id="@+id/btnBscRuta"
         android:layout_gravity="center"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="50dp"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:background="@drawable/selector_btn_login"

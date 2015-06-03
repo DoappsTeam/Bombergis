@@ -98,15 +98,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         return resultList;
     }
 
-
-    /**Interfaces**/
-    public interface InterfaceSearch {
-        void getAddress(String address);
-    }
-    public void setInterfaceSearch(InterfaceSearch interfaceSearch) {
-        this.interfaceSearch = interfaceSearch;
-    }
-
     /**Adapter interno**/
     public class AutoCompleteAdapter extends ArrayAdapter<String> implements Filterable {
         private ArrayList<String> resulList;
@@ -149,6 +140,15 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
             };
             return filter;
         }
+    }
+
+
+    /**Interfaces**/
+    public interface InterfaceSearch {
+        void getAddress(String address);
+    }
+    public void setInterfaceSearch(InterfaceSearch interfaceSearch) {
+        this.interfaceSearch = interfaceSearch;
     }
 
 
