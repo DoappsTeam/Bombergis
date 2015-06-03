@@ -292,7 +292,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
             @Override
             public void getRoute(int s, String ruta) {
                 if(s == 1){
-                    //map.clear();
+                    map.clear();
                     mapOperation = new MapOperation();
                     mapOperation.getLocation(ruta);
                     mapOperation.setInterfaceLocation(new MapOperation.InterfaceLocation() {
