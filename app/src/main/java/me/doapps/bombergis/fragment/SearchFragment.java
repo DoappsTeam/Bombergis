@@ -29,8 +29,8 @@ import me.doapps.bombergis.operation.MapOperation;
 /**
  * Created by MiguelGarrafa_2 on 27/05/2015.
  */
-public class SearchFragment extends Fragment implements View.OnClickListener {
-    private Button btnBuscar;
+public class SearchFragment extends Fragment{
+    //private Button btnBuscar;
     private InterfaceSearch interfaceSearch;
     private AutoCompleteTextView txtAddress;
     private String data = "";
@@ -46,7 +46,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     /*Conectar el Fragment con el layout*/
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        btnBuscar = (Button) view.findViewById(R.id.btnBuscar);
+        //btnBuscar = (Button) view.findViewById(R.id.btnBuscar);
         txtAddress = (AutoCompleteTextView) view.findViewById(R.id.txtAddress);
         return view;
     }
@@ -60,17 +60,18 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         txtAddress.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.e("seleccionado", resultList.get(i));
+                Log.e("Lugar - Reference", resultList.get(i)+"-"+referenceList.get(i));
+                interfaceSearch.getAddress(referenceList.get(i));
             }
         });
 
-        btnBuscar.setOnClickListener(this);
+        //btnBuscar.setOnClickListener(this);
     }
 
-    @Override
+    /*@Override
     public void onClick(View v) {
         interfaceSearch.getAddress(txtAddress.getText().toString());
-    }
+    }*/
 
 
     /**Methods**/

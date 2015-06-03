@@ -58,6 +58,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.e("Lugar - Reference", resultList.get(i)+"--"+referenceList.get(i));
+                interfaceRoute.getRoute(1, referenceList.get(i));
             }
         });
 
@@ -66,6 +67,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.e("Lugar - Reference", resultList.get(i)+"--"+referenceList.get(i));
+                interfaceRoute.getRoute(1, referenceList.get(i));
             }
         });
 
@@ -104,7 +106,6 @@ public class RouteFragment extends Fragment implements View.OnClickListener{
         });
         return resultList;
     }
-
 
     /**Adapter interno**/
     public class AutoCompleteAdapter extends ArrayAdapter<String> implements Filterable {
@@ -149,7 +150,6 @@ public class RouteFragment extends Fragment implements View.OnClickListener{
             return filter;
         }
     }
-
 
     /** Interference **/
     public interface InterfaceRoute{
