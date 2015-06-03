@@ -10,6 +10,8 @@
     <string name="contraseña">Contraseña</string>
     <string name="ingresar">Ingresar</string>
     <string name="into_address">Buscar</string>
+    <string name="Origin">Origen</string>
+    <string name="destination">Destino</string>
 
     <!-- Web services -->
     <string name="sensor">false</string>

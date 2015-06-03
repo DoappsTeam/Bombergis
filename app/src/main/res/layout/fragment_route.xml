@@ -80,16 +80,6 @@
         android:textColor="@color/white"
         android:text="Buscar Ruta(de)"
         android:textSize="20dp"/>
-    <Button
-        android:id="@+id/btnBscRuta2"
-        android:layout_gravity="center"
-        android:layout_marginTop="35dp"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:background="@drawable/selector_btn_login"
-        android:textColor="@color/white"
-        android:text="Buscar Ruta(hasta)"
-        android:textSize="20dp"/>
 
     <Button
         android:id="@+id/btnBscRuta2"
