@@ -15,19 +15,20 @@
         android:textColor="#000000"
         android:textSize="35sp"
         android:textStyle="bold" />
-    >
 
-    <EditText
+
+    <AutoCompleteTextView
         android:id="@+id/txtAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtPass"
-        android:layout_alignStart="@+id/txtPass"
-        android:layout_below="@+id/lblLogin"
-        android:layout_marginTop="50dp"
-        android:hint="Ingrese Dirección"
+        android:ems="10"
+        android:hint="@string/into_address"
+        android:singleLine="true"
         android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textSize="20sp">
+
+        <requestFocus />
+    </AutoCompleteTextView>
 
     <Button
         android:id="@+id/btnBuscar"

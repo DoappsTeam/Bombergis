@@ -14,6 +14,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,7 +33,41 @@ public class MapOperation {
     private GoogleMap mMap;
 
     private InterfaceReference interfaceReference;
+    private InterfacePredictions interfacePredictions;
     private InterfaceLocation interfaceLocation;
+
+    public void getPredictions(String input){
+        final RequestParams params = new RequestParams();
+        params.put("input", input);
+        params.put("sensor", "false");
+        params.put("key", "AIzaSyB7X6vhRYIoAzZWhIP_Tr05wx-q8ajslWg");
+        params.put("components", "country:pe");
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(Settings.WS_GET_REFERENCE, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                Log.e("response success", response.toString());
+                try {
+                    if(response.getString("status").equals("OK")){
+                        interfacePredictions.getArrayPrediction(response.getString("status"),response.getJSONArray("predictions"));
+                    }else{
+                        interfacePredictions.getArrayPrediction(response.getString("status"),null);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Log.e("response failure", responseString);
+            }
+        });
+    }
+
 
     public void getReferences(String input) {
         final RequestParams params = new RequestParams();
@@ -48,7 +83,9 @@ public class MapOperation {
                 super.onSuccess(statusCode, headers, response);
                 Log.e("response success", response.toString());
                 try {
-                    interfaceReference.getResponse(response.get("status").toString(),response.getJSONArray("predictions").getJSONObject(0).getString("reference"));
+                    if(response.getString("status").equals("OK")){
+                        interfaceReference.getResponse(response.get("status").toString(),response.getJSONArray("predictions").getJSONObject(0).getString("reference"));
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -97,6 +134,13 @@ public class MapOperation {
         this.interfaceReference = interfaceReference;
     }
 
+    public interface InterfacePredictions{
+        void getArrayPrediction(String status, JSONArray predictions);
+    }
+    public void setInterfacePredictions(InterfacePredictions interfacePredictions){
+        this.interfacePredictions = interfacePredictions;
+    }
+
     public interface InterfaceLocation{
         void getLocation(String status, Double lat, Double lng);
     }
@@ -104,4 +148,5 @@ public class MapOperation {
     public void setInterfaceLocation(InterfaceLocation interfaceLocation){
         this.interfaceLocation = interfaceLocation;
     }
+
 }
