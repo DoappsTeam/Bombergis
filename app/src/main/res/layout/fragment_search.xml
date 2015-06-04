@@ -30,15 +30,4 @@
 
         <requestFocus />
     </AutoCompleteTextView>
-<!--
-    <Button
-        android:id="@+id/btnBuscar"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/selector_btn_login"
-        android:text="Buscar"
-        android:textColor="@color/white"
-        android:textSize="20sp" /> -->
 </LinearLayout>

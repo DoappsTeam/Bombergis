@@ -29,7 +29,7 @@ import me.doapps.bombergis.operation.MapOperation;
  */
 public class RouteFragment extends Fragment implements View.OnClickListener{
     private Button btnBscRuta;
-    private Button btnBscRuta2;
+    //private Button btnBscRuta2;
     private InterfaceRoute interfaceRoute;
     private AutoCompleteTextView autoCompleteOrigen;
     private AutoCompleteTextView autoCompleteDestino;
@@ -44,7 +44,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_route, container, false);
         btnBscRuta = (Button)view.findViewById(R.id.btnBscRuta);
-        btnBscRuta2 = (Button)view.findViewById(R.id.btnBscRuta2);
+        //btnBscRuta2 = (Button)view.findViewById(R.id.btnBscRuta2);
         autoCompleteOrigen = (AutoCompleteTextView)view.findViewById(R.id.autoCompleteOrigen);
         autoCompleteDestino = (AutoCompleteTextView)view.findViewById(R.id.autoCompleteDestino);
 
@@ -72,13 +72,13 @@ public class RouteFragment extends Fragment implements View.OnClickListener{
         });
 
         btnBscRuta.setOnClickListener(this);
-        btnBscRuta2.setOnClickListener(this);
+        //btnBscRuta2.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnBscRuta){interfaceRoute.getRoute(3,"ROUTE");}
-        if(v.getId() == R.id.btnBscRuta2){interfaceRoute.getRoute(2, autoCompleteDestino.getText().toString());}
+        //if(v.getId() == R.id.btnBscRuta2){interfaceRoute.getRoute(2, autoCompleteDestino.getText().toString());}
 
     }
 

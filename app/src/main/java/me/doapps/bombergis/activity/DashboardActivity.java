@@ -61,7 +61,14 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     private MapOperation mapOperation;
     CameraPosition camPos;
     CameraUpdate camUpd3;
-    Marker marker;
+    Marker markerS;
+    Marker markerO;
+    Marker markerD;
+
+    int stateMarkerO = 0;
+    int stateMarkerD = 0;
+    int stateMap = 0;
+
     static LatLng originLaLng;
     static LatLng destinationLaLng;
 
@@ -272,7 +279,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                     public void getLocation(String status, Double lat, Double lng) {
                         if (status.equals("OK")) {
                             map.clear();
-                            marker = map.addMarker(new MarkerOptions()
+                            markerS = map.addMarker(new MarkerOptions()
                                     .position(new LatLng(lat, lng))
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
@@ -298,7 +305,10 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
             @Override
             public void getRoute(int s, String ruta) {
                 if(s == 1){
-                    //map.clear();
+                    if(stateMap == 0){map.clear(); stateMap = 1;}
+                    //if(stateMarkerO == 1){map.addMarker(new MarkerOptions().position(originLaLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));}
+                    //if(stateMarkerD == 1){map.addMarker(new MarkerOptions().position(destinationLaLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));}
+
                     mapOperation = new MapOperation();
                     mapOperation.getLocation(ruta);
                     mapOperation.setInterfaceLocation(new MapOperation.InterfaceLocation() {
@@ -306,10 +316,11 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                         public void getLocation(String status, Double lat, Double lng) {
                             if (status.equals("OK")) {
                                 originLaLng = new LatLng(lat,lng);
-                                marker = map.addMarker(new MarkerOptions()
+                                //markerO.setVisible(false);
+                                markerO = map.addMarker(new MarkerOptions()
                                         .position(originLaLng)
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-
+                                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)));
+                                stateMarkerO = 1;
                                 camPos = new CameraPosition.Builder()
                                         .target(originLaLng)
                                         .zoom(16)
@@ -322,18 +333,22 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 }
 
                 if(s == 2){
-                    //map.clear();
+                    if(stateMap == 0){map.clear(); stateMap = 1;}
+                    //if(stateMarkerO == 1){map.addMarker(new MarkerOptions().position(originLaLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));}
+                    //if(stateMarkerD == 1){map.addMarker(new MarkerOptions().position(destinationLaLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));}
+
                     mapOperation = new MapOperation();
                     mapOperation.getLocation(ruta);
                     mapOperation.setInterfaceLocation(new MapOperation.InterfaceLocation() {
                         @Override
                         public void getLocation(String status, Double lat, Double lng) {
                             if (status.equals("OK")) {
-                                destinationLaLng = new LatLng(lat,lng);
-                                marker = map.addMarker(new MarkerOptions()
+                                destinationLaLng = new LatLng(lat, lng);
+                                //markerD.setVisible(false);
+                                markerD = map.addMarker(new MarkerOptions()
                                         .position(destinationLaLng)
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-
+                                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker2)));
+                                stateMarkerD = 1;
                                 camPos = new CameraPosition.Builder()
                                         .target(destinationLaLng)
                                         .zoom(16)
@@ -346,18 +361,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 }
 
                 if(s == 3){
-
-                    /*Polyline line = map.addPolyline(new PolylineOptions().
-                            add(originLaLng, destinationLaLng)
-                            .width(5).color(Color.RED));
-
-                    camPos = new CameraPosition.Builder()
-                            .target(new LatLng((originLaLng.latitude+destinationLaLng.latitude)/2, (originLaLng.longitude+destinationLaLng.longitude)/2))
-                            .zoom(14)
-                            .build();
-                    camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
-                    map.animateCamera(camUpd3);*/
-
+                    //map.clear();
                     mapOperation = new MapOperation();
                     mapOperation.getSteps(String.valueOf(originLaLng.latitude)+","+String.valueOf(originLaLng.longitude),String.valueOf(destinationLaLng.latitude)+","+String.valueOf(destinationLaLng.longitude));
                     mapOperation.setInterfaceSteps(new MapOperation.InterfaceSteps() {
@@ -366,17 +370,34 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                             if (status.equals("OK")) {
                                 try {
                                     //JSONArray arraySteps = new JSONArray(steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps"));
-                                    Log.e("objeto steps",steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps") .toString());
+                                    Log.e("objeto steps", steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").toString());
                                     startLocation = new ArrayList<LatLng>();
                                     endLocation = new ArrayList<LatLng>();
 
-                                    for (int k = 0;k<steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").length();k++){
-                                        startLocation.add(new LatLng(steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("start_location").getDouble("lat"),steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("start_location").getDouble("lng")));
-                                        endLocation.add(new LatLng(steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("end_location").getDouble("lat"),steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("end_location").getDouble("lng")));
+                                    for (int k = 0; k < steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").length(); k++) {
+                                        startLocation.add(new LatLng(steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("start_location").getDouble("lat"), steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("start_location").getDouble("lng")));
+                                        endLocation.add(new LatLng(steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("end_location").getDouble("lat"), steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("end_location").getDouble("lng")));
                                         Polyline line = map.addPolyline(new PolylineOptions().
                                                 add(startLocation.get(k), endLocation.get(k))
-                                                .width(5).color(Color.RED));
+                                                .width(12).color(Color.rgb(150,40,27)));
                                     }
+
+                                    map.addMarker(new MarkerOptions()
+                                            .position(originLaLng)
+                                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)));
+
+                                    map.addMarker(new MarkerOptions()
+                                            .position(destinationLaLng)
+                                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker2)));
+
+                                    camPos = new CameraPosition.Builder()
+                                            .target(new LatLng((originLaLng.latitude + destinationLaLng.latitude) / 2, (originLaLng.longitude + destinationLaLng.longitude) / 2))
+                                            .zoom(13)
+                                            .build();
+                                    camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
+                                    map.animateCamera(camUpd3);
+
+                                    stateMap = 0;
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
