@@ -67,7 +67,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.e("Lugar - Reference", resultList.get(i)+"--"+referenceList.get(i));
-                interfaceRoute.getRoute(1, referenceList.get(i));
+                interfaceRoute.getRoute(2, referenceList.get(i));
             }
         });
 
@@ -77,7 +77,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.btnBscRuta){interfaceRoute.getRoute(1,autoCompleteOrigen.getText().toString());}
+        if(v.getId() == R.id.btnBscRuta){interfaceRoute.getRoute(3,"ROUTE");}
         if(v.getId() == R.id.btnBscRuta2){interfaceRoute.getRoute(2, autoCompleteDestino.getText().toString());}
 
     }

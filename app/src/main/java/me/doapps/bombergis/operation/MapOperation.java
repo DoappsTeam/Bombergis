@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.InterfaceAddress;
+import java.util.ArrayList;
 
 import me.doapps.bombergis.R;
 import me.doapps.bombergis.activity.DashboardActivity;
@@ -35,6 +36,41 @@ public class MapOperation {
     private InterfaceReference interfaceReference;
     private InterfacePredictions interfacePredictions;
     private InterfaceLocation interfaceLocation;
+    private InterfaceSteps interfaceSteps;
+
+    public void getSteps(String origen, String destino){
+        final RequestParams params = new RequestParams();
+        params.put("origin", origen);
+        params.put("destination", destino);
+        params.put("sensor", "false");
+        params.put("units", "metric");
+        params.put("mode", "driving");
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(Settings.WS_GET_STEPS, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                Log.e("response steps", response.toString());
+                try {
+                    if(response.getString("status").equals("OK")){
+                        //interfacePredictions.getArrayPrediction(response.getString("status"),response.getJSONArray("predictions"));
+                        interfaceSteps.getRouteSteps(response.getString("status"),response.getJSONArray("routes").getJSONObject(0));
+                    }else{
+                        interfacePredictions.getArrayPrediction(response.getString("status"),null);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Log.e("response failure", responseString);
+            }
+        });
+    }
 
     public void getPredictions(String input){
         final RequestParams params = new RequestParams();
@@ -147,6 +183,14 @@ public class MapOperation {
 
     public void setInterfaceLocation(InterfaceLocation interfaceLocation){
         this.interfaceLocation = interfaceLocation;
+    }
+
+    public interface InterfaceSteps{
+        void getRouteSteps(String status, JSONObject steps);
+    }
+
+    public void setInterfaceSteps(InterfaceSteps interfaceSteps){
+        this.interfaceSteps = interfaceSteps;
     }
 
 }

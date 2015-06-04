@@ -1,6 +1,7 @@
 package me.doapps.bombergis.activity;
 
 import android.annotation.TargetApi;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -19,6 +20,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,12 +62,11 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     CameraPosition camPos;
     CameraUpdate camUpd3;
     Marker marker;
-    Double latI ;
-    Double lngI;
-    Double latD ;
-    Double lngD;
-    Double latP ;
-    Double lngP;
+    static LatLng originLaLng;
+    static LatLng destinationLaLng;
+
+    public ArrayList<LatLng> startLocation;
+    public ArrayList<LatLng> endLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -292,19 +298,20 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
             @Override
             public void getRoute(int s, String ruta) {
                 if(s == 1){
-                    map.clear();
+                    //map.clear();
                     mapOperation = new MapOperation();
                     mapOperation.getLocation(ruta);
                     mapOperation.setInterfaceLocation(new MapOperation.InterfaceLocation() {
                         @Override
                         public void getLocation(String status, Double lat, Double lng) {
                             if (status.equals("OK")) {
+                                originLaLng = new LatLng(lat,lng);
                                 marker = map.addMarker(new MarkerOptions()
-                                        .position(new LatLng(lat, lng))
+                                        .position(originLaLng)
                                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
                                 camPos = new CameraPosition.Builder()
-                                        .target(new LatLng(lat, lng))
+                                        .target(originLaLng)
                                         .zoom(16)
                                         .build();
                                 camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
@@ -322,12 +329,13 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                         @Override
                         public void getLocation(String status, Double lat, Double lng) {
                             if (status.equals("OK")) {
+                                destinationLaLng = new LatLng(lat,lng);
                                 marker = map.addMarker(new MarkerOptions()
-                                        .position(new LatLng(lat, lng))
+                                        .position(destinationLaLng)
                                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
                                 camPos = new CameraPosition.Builder()
-                                        .target(new LatLng(lat, lng))
+                                        .target(destinationLaLng)
                                         .zoom(16)
                                         .build();
                                 camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
@@ -337,7 +345,46 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                     });
                 }
 
+                if(s == 3){
 
+                    /*Polyline line = map.addPolyline(new PolylineOptions().
+                            add(originLaLng, destinationLaLng)
+                            .width(5).color(Color.RED));
+
+                    camPos = new CameraPosition.Builder()
+                            .target(new LatLng((originLaLng.latitude+destinationLaLng.latitude)/2, (originLaLng.longitude+destinationLaLng.longitude)/2))
+                            .zoom(14)
+                            .build();
+                    camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
+                    map.animateCamera(camUpd3);*/
+
+                    mapOperation = new MapOperation();
+                    mapOperation.getSteps(String.valueOf(originLaLng.latitude)+","+String.valueOf(originLaLng.longitude),String.valueOf(destinationLaLng.latitude)+","+String.valueOf(destinationLaLng.longitude));
+                    mapOperation.setInterfaceSteps(new MapOperation.InterfaceSteps() {
+                        @Override
+                        public void getRouteSteps(String status, JSONObject steps) {
+                            if (status.equals("OK")) {
+                                try {
+                                    //JSONArray arraySteps = new JSONArray(steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps"));
+                                    Log.e("objeto steps",steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps") .toString());
+                                    startLocation = new ArrayList<LatLng>();
+                                    endLocation = new ArrayList<LatLng>();
+
+                                    for (int k = 0;k<steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").length();k++){
+                                        startLocation.add(new LatLng(steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("start_location").getDouble("lat"),steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("start_location").getDouble("lng")));
+                                        endLocation.add(new LatLng(steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("end_location").getDouble("lat"),steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("end_location").getDouble("lng")));
+                                        Polyline line = map.addPolyline(new PolylineOptions().
+                                                add(startLocation.get(k), endLocation.get(k))
+                                                .width(5).color(Color.RED));
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    });
+                }
             }
         });
     }
