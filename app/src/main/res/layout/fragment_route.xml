@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Ruta"
+        android:text="@string/title_route"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#000000"
         android:textSize="35dp"
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:src="@mipmap/ic_marker"/>
+            android:src="@mipmap/ic_marker" />
 
         <AutoCompleteTextView
             android:id="@+id/autoCompleteOrigen"
@@ -51,8 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:src="@mipmap/ic_marker2" />
+            android:src="@mipmap/ic_marker2"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
         <AutoCompleteTextView

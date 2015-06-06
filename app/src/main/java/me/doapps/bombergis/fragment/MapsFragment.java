@@ -38,11 +38,17 @@ public class MapsFragment extends Fragment {
         radioMapsSatelital = (RadioButton) view.findViewById(R.id.radioMapsSatelital);
         radioMapsHibrido = (RadioButton) view.findViewById(R.id.radioMapsHibrido);
 
-        if(stateMaps == 1){radioMaps.check(R.id.radioMapsNormal);}
-        if(stateMaps == 2){radioMaps.check(R.id.radioMapsSatelital);}
-        if(stateMaps == 3){radioMaps.check(R.id.radioMapsHibrido);}
+        if (stateMaps == 1) {
+            radioMaps.check(R.id.radioMapsNormal);
+        }
+        if (stateMaps == 2) {
+            radioMaps.check(R.id.radioMapsSatelital);
+        }
+        if (stateMaps == 3) {
+            radioMaps.check(R.id.radioMapsHibrido);
+        }
 
-         return view;
+        return view;
     }
 
     @Override
@@ -51,30 +57,30 @@ public class MapsFragment extends Fragment {
 
         radioMaps.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
-          @Override
-          public void onCheckedChanged(RadioGroup group, int checkedId) {
-            switch (checkedId) {
-                case R.id.radioMapsNormal:
-                    stateMaps = 1;
-                    interfaceChangeMaps.getMaps(stateMaps);
-                    //Toast.makeText(getActivity(), "soy normal", Toast.LENGTH_SHORT).show();
-                    break;
-                case R.id.radioMapsSatelital:
-                    stateMaps = 2;
-                    interfaceChangeMaps.getMaps(stateMaps);
-                    //Toast.makeText(getActivity(), "soy satelital", Toast.LENGTH_SHORT).show();
-                    break;
-                case R.id.radioMapsHibrido:
-                    stateMaps = 3;
-                    interfaceChangeMaps.getMaps(stateMaps);
-                    //Toast.makeText(getActivity(), "soy hibrido", Toast.LENGTH_SHORT).show();
-                    break;
-                    default:
-                    break;
-            }
-          }
-         }
-     );
+                                                 @Override
+                                                 public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                                     switch (checkedId) {
+                                                         case R.id.radioMapsNormal:
+                                                             stateMaps = 1;
+                                                             interfaceChangeMaps.getMaps(stateMaps);
+                                                             //Toast.makeText(getActivity(), "soy normal", Toast.LENGTH_SHORT).show();
+                                                             break;
+                                                         case R.id.radioMapsSatelital:
+                                                             stateMaps = 2;
+                                                             interfaceChangeMaps.getMaps(stateMaps);
+                                                             //Toast.makeText(getActivity(), "soy satelital", Toast.LENGTH_SHORT).show();
+                                                             break;
+                                                         case R.id.radioMapsHibrido:
+                                                             stateMaps = 3;
+                                                             interfaceChangeMaps.getMaps(stateMaps);
+                                                             //Toast.makeText(getActivity(), "soy hibrido", Toast.LENGTH_SHORT).show();
+                                                             break;
+                                                         default:
+                                                             break;
+                                                     }
+                                                 }
+                                             }
+        );
     }
 
     public interface InterfaceChangeMaps {

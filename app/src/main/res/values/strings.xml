@@ -14,9 +14,26 @@
     <string name="destination">Destino</string>
     <string name="route">Trazar Ruta</string>
 
+    <!--Titles of Fragments-->
+    <string name="title_interest">Interes</string>
+    <string name="title_route">Ruta</string>
+    <string name="title_search">Busqueda</string>
+    <!--General content Fragments-->
+    <string name="hydrant">Hidrante de Agua</string>
+    <string name="college">Colegios</string>
+    <string name="commissioner">Comisarias</string>
+    <string name="fuel">Grifos</string>
+    <string name="fireman">Bomberos</string>
+    <string name="hospital">Hospitales</string>
+    <string name="normal">Normal</string>
+    <string name="satellite">Satelital</string>
+    <string name="hybrid">Hibrido</string>
+    <!-- Dashboard Activity-->
+    <string name="alert">Se envio Alarma a todas las Unidades</string>
     <!-- Web services -->
     <string name="sensor">false</string>
-    <string name="browser_key">AIzaSyAsAFJNRMzPJ3LeRjbC_MDJK1GiBDSwNX4</string>
+    <string name="browser_key">AIzaSyAOUMmPNIy6qNzViu0l7Bus8z9qhV_OWeI</string>
     <string name="components">country:pe</string>
+
 
 </resources>

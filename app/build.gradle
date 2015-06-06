@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "me.doapps.bombergis"
-        minSdkVersion 11
+        minSdkVersion 14
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -26,4 +26,5 @@ dependencies {
     compile 'com.android.support:support-v4:22.1.1'
     compile 'com.google.android.gms:play-services:6.5.87'
     compile 'com.loopj.android:android-async-http:1.4.7'
+    compile 'com.getbase:floatingactionbutton:1.9.0'
 }

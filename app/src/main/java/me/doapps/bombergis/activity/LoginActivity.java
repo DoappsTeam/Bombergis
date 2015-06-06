@@ -31,23 +31,24 @@ public class LoginActivity extends ActionBarActivity {
         setContentView(R.layout.activity_login);
 
         sessionManager = new SessionManager(LoginActivity.this);
-        if(sessionManager.getUserLogin()){
+        if (sessionManager.getUserLogin()) {
             Intent intent = new Intent(this, DashboardActivity.class);
             startActivity(intent);
             finish();
         }
 
-        txtUser = (TextView)findViewById(R.id.txtUser);
-        txtPass = (TextView)findViewById(R.id.txtPass);
-        btnLogin = (Button)findViewById(R.id.btnLogin);
+        txtUser = (TextView) findViewById(R.id.txtUser);
+        txtPass = (TextView) findViewById(R.id.txtPass);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
     }
+
     public void ingresarCuenta(View view) {
 
-        if (isValidEmail(txtUser.getText().toString())){
-            if(txtPass.getText().toString().length() < 6 || txtPass.getText().toString().equals("")){
+        if (isValidEmail(txtUser.getText().toString())) {
+            if (txtPass.getText().toString().length() < 6 || txtPass.getText().toString().equals("")) {
                 txtPass.requestFocus();
-                Toast.makeText(LoginActivity.this,"Ingrese minimo 6 caracteres", Toast.LENGTH_SHORT).show();
-            }else{
+                Toast.makeText(LoginActivity.this, "Ingrese minimo 6 caracteres", Toast.LENGTH_SHORT).show();
+            } else {
                 sessionManager.setUserLogin(true);
                 sessionManager.setUserEmail(txtPass.getText().toString());
                 sessionManager.setUserPass(txtPass.getText().toString());
@@ -55,10 +56,9 @@ public class LoginActivity extends ActionBarActivity {
                 startActivity(intent);
                 finish();
             }
-        }
-        else {
+        } else {
             txtUser.requestFocus();
-            Toast.makeText(this,"Correo no valido",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Correo no valido", Toast.LENGTH_SHORT).show();
         }
     }
 

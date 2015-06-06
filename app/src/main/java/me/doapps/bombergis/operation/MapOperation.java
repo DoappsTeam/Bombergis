@@ -76,7 +76,7 @@ public class MapOperation {
         final RequestParams params = new RequestParams();
         params.put("input", input);
         params.put("sensor", "false");
-        params.put("key", "AIzaSyDDdXNq0s2s1i6582D4wDZXnCcidyRZzIY");
+        params.put("key", "AIzaSyAOUMmPNIy6qNzViu0l7Bus8z9qhV_OWeI");
         params.put("components", "country:pe");
 
         AsyncHttpClient client = new AsyncHttpClient();
@@ -109,7 +109,7 @@ public class MapOperation {
         final RequestParams params = new RequestParams();
         params.put("input", input);
         params.put("sensor", "false");
-        params.put("key", "AIzaSyDDdXNq0s2s1i6582D4wDZXnCcidyRZzIY");
+        params.put("key", "AIzaSyAOUMmPNIy6qNzViu0l7Bus8z9qhV_OWeI");
         params.put("components", "country:pe");
 
         AsyncHttpClient client = new AsyncHttpClient();
@@ -140,7 +140,7 @@ public class MapOperation {
         final RequestParams params = new RequestParams();
         params.put("reference", reference);
         params.put("sensor", "false");
-        params.put("key", "AIzaSyDDdXNq0s2s1i6582D4wDZXnCcidyRZzIY");
+        params.put("key", "AIzaSyAOUMmPNIy6qNzViu0l7Bus8z9qhV_OWeI");
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(Settings.WS_GET_LOCATION, params, new JsonHttpResponseHandler() {

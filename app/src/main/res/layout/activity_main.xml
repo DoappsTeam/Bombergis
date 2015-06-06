@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/map"
+        class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_margin="20dp"
-        class="com.google.android.gms.maps.SupportMapFragment" />
+        android:layout_margin="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,50 +17,48 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/imageView1"
-            android:src="@mipmap/ic_hospital"
-            android:onClick="mostrarHospitales"/>
-
-        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="mostrarHospitales"
+            android:src="@mipmap/ic_hospital" />
+
+        <ImageButton
             android:id="@+id/imageView2"
-            android:src="@mipmap/ic_school"
-            android:onClick="mostrarColegios"/>
-
-        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="mostrarColegios"
+            android:src="@mipmap/ic_school" />
+
+        <ImageButton
             android:id="@+id/imageView3"
-            android:src="@mipmap/ic_hydrant"
-            android:onClick="mostrarHidrantes"/>
-
-        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="mostrarHidrantes"
+            android:src="@mipmap/ic_hydrant" />
+
+        <ImageButton
             android:id="@+id/imageView4"
-            android:src="@mipmap/ic_fireman"
-            android:onClick="mostrarBomberos"/>
-
-        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="mostrarBomberos"
+            android:src="@mipmap/ic_fireman" />
+
+        <ImageButton
             android:id="@+id/imageView5"
-            android:src="@mipmap/ic_gasstation"
-            android:onClick="mostrarGrifos"/>
-
-        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="mostrarGrifos"
+            android:src="@mipmap/ic_gasstation" />
+
+        <ImageButton
             android:id="@+id/imageView6"
-            android:src="@mipmap/ic_policestation"
-            android:onClick="mostrarComisarias"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="mostrarComisarias"
+            android:src="@mipmap/ic_policestation" />
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>
