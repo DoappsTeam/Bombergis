@@ -532,52 +532,52 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
 
         /*agregamos hospitales*/
         hospitales = new ArrayList<>();
-        hospitales.add(new LatLng(-12.101524, -77.021626));
-        hospitales.add(new LatLng(-12.097663, -77.022184));
-        hospitales.add(new LatLng(-12.154225, -77.055632));
-        hospitales.add(new LatLng(-12.086472, -77.098543));
-        hospitales.add(new LatLng(-12.162435, -77.045563));
-        hospitales.add(new LatLng(-12.067863, -77.056342));
+        hospitales.add(new LatLng(-12.080524, -77.000626));
+        hospitales.add(new LatLng(-12.075663, -77.001184));
+        hospitales.add(new LatLng(-12.133225, -77.003632));
+        hospitales.add(new LatLng(-12.065472, -77.006543));
+        hospitales.add(new LatLng(-12.141435, -77.003563));
+        hospitales.add(new LatLng(-12.046863, -77.005342));
         /*agregamos colegios*/
         colegios = new ArrayList<>();
-        colegios.add(new LatLng(-12.106524, -77.025632));
-        colegios.add(new LatLng(-12.095632, -77.025623));
-        colegios.add(new LatLng(-12.156524, -77.054525));
-        colegios.add(new LatLng(-12.086424, -77.096524));
-        colegios.add(new LatLng(-12.164524, -77.046247));
-        colegios.add(new LatLng(-12.067241, -77.057324));
+        colegios.add(new LatLng(-12.086524, -77.000632));
+        colegios.add(new LatLng(-12.075632, -77.000623));
+        colegios.add(new LatLng(-12.136524, -77.020525));
+        colegios.add(new LatLng(-12.066424, -77.030524));
+        colegios.add(new LatLng(-12.144524, -77.010247));
+        colegios.add(new LatLng(-12.047241, -77.050324));
         /*agregamos hidrantes*/
         hidrantes = new ArrayList<>();
-        hidrantes.add(new LatLng(-12.153566, -77.024524));
-        hidrantes.add(new LatLng(-12.056345, -77.026525));
-        hidrantes.add(new LatLng(-12.113454, -77.067862));
-        hidrantes.add(new LatLng(-12.094755, -77.078424));
-        hidrantes.add(new LatLng(-12.145256, -77.045675));
-        hidrantes.add(new LatLng(-12.067345, -77.041455));
+        hidrantes.add(new LatLng(-12.133566, -77.000524));
+        hidrantes.add(new LatLng(-12.036345, -77.000525));
+        hidrantes.add(new LatLng(-12.093454, -77.030862));
+        hidrantes.add(new LatLng(-12.074755, -77.040424));
+        hidrantes.add(new LatLng(-12.125256, -77.010675));
+        hidrantes.add(new LatLng(-12.047345, -77.010455));
         /*agregamos bomberos*/
         bomberos = new ArrayList<>();
-        bomberos.add(new LatLng(-12.113414, -77.056822));
-        bomberos.add(new LatLng(-12.076245, -77.057686));
-        bomberos.add(new LatLng(-12.157652, -77.089873));
-        bomberos.add(new LatLng(-12.056735, -77.087252));
-        bomberos.add(new LatLng(-12.156732, -77.067824));
-        bomberos.add(new LatLng(-12.056782, -77.069435));
+        bomberos.add(new LatLng(-12.093414, -77.000822));
+        bomberos.add(new LatLng(-12.056245, -77.000686));
+        bomberos.add(new LatLng(-12.137652, -77.020873));
+        bomberos.add(new LatLng(-12.036735, -77.030252));
+        bomberos.add(new LatLng(-12.136732, -77.010824));
+        bomberos.add(new LatLng(-12.036782, -77.010435));
         /*agregramos grifos*/
         grifos = new ArrayList<>();
-        grifos.add(new LatLng(-12.173525, -77.023456));
-        grifos.add(new LatLng(-12.078356, -77.097354));
-        grifos.add(new LatLng(-12.114794, -77.024562));
-        grifos.add(new LatLng(-12.098435, -77.024662));
-        grifos.add(new LatLng(-12.113514, -77.087356));
-        grifos.add(new LatLng(-12.097452, -77.097356));
+        grifos.add(new LatLng(-12.123525, -77.000456));
+        grifos.add(new LatLng(-12.058356, -77.040354));
+        grifos.add(new LatLng(-12.094794, -77.000562));
+        grifos.add(new LatLng(-12.078435, -77.000662));
+        grifos.add(new LatLng(-12.093514, -77.030356));
+        grifos.add(new LatLng(-12.077452, -77.040356));
         /*agregramos comisarias*/
         comisarias = new ArrayList<>();
-        comisarias.add(new LatLng(-12.114546, -77.076244));
-        comisarias.add(new LatLng(-12.062461, -77.014462));
-        comisarias.add(new LatLng(-12.178624, -77.076245));
-        comisarias.add(new LatLng(-12.076243, -77.076254));
-        comisarias.add(new LatLng(-12.076262, -77.052466));
-        comisarias.add(new LatLng(-12.097624, -77.087343));
+        comisarias.add(new LatLng(-12.114546, -77.020244));
+        comisarias.add(new LatLng(-12.062461, -77.000462));
+        comisarias.add(new LatLng(-12.178624, -77.020245));
+        comisarias.add(new LatLng(-12.076243, -77.020254));
+        comisarias.add(new LatLng(-12.076262, -77.010466));
+        comisarias.add(new LatLng(-12.097624, -77.030343));
     }
 
     public void Actualizar(){
