@@ -65,6 +65,8 @@ public class InterestFragment extends Fragment {
         if (stateHidrantes == 1) {
             checkHidrantes.setChecked(true);
         }
+
+        //interfaceInstitutes.getInstitute(stateHospitales, stateColegios, stateHidrantes, stateBomberos, stateGrifos, stateComisarias);
         return view;
     }
 

@@ -49,6 +49,13 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     private ImageButton btnRoute;
     private GoogleMap map;
 
+    static ArrayList<Marker> markerHospitales;
+    static ArrayList<Marker> markerColegios;
+    static ArrayList<Marker> markerHidrantes;
+    static ArrayList<Marker> markerBomberos;
+    static ArrayList<Marker> markerGrifos;
+    static ArrayList<Marker> markerComisarias;
+
     private List<LatLng> hospitales;
     private List<LatLng> colegios;
     private List<LatLng> hidrantes;
@@ -56,41 +63,27 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     private List<LatLng> grifos;
     private List<LatLng> comisarias;
 
-    static int band1=0;
-    static int band2=0;
-    static int band3=0;
-    static int band4=0;
-    static int band5=0;
-    static int band6=0;
-
-    static Double lati= 0.0;
-    static  Double longi= 0.0;
-
     static int stateMapsDashboard = 1;
     private SearchFragment searchFragment;
     private RouteFragment routeFragment;
     private MapOperation mapOperation;
     CameraPosition camPos;
     CameraUpdate camUpd3;
-    Marker markerS;
-    Marker markerO;
-    Marker markerD;
-
-    public static int generalState = 1;
+    static Marker markerS;
+    static Marker markerO;
+    static Marker markerD;
 
     /**
      * variable floatButton*
      */
     private FloatingActionButton floatingActionButton;
-    int stateMarkerO = 0;
-    int stateMarkerD = 0;
-    int stateMap = 0;
 
     static LatLng originLaLng;
     static LatLng destinationLaLng;
 
     public static ArrayList<LatLng> startLocation;
     public static ArrayList<LatLng> endLocation;
+    public static ArrayList<Polyline> routeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,10 +105,9 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         /*Inicializar el mapa*/
         setUpMapIfNeeded();
         /*Inicializo Searragment*/
-        initSearhFragment();
+        initSearchFragment();
         /*cargamos markers*/
         loadMarkers();
-       // Toast.makeText(getApplicationContext(), String.valueOf(generalState), Toast.LENGTH_SHORT).show();
     }
 
 
@@ -125,134 +117,39 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
 
         switch (v.getId()) {
             case R.id.btnSearch:
-               // Toast.makeText(getApplicationContext(), String.valueOf(generalState), Toast.LENGTH_SHORT).show();
                 btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search2));
                 btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest));
                 btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps));
                 btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route));
-                initSearhFragment();
+
+                initSearchFragment();
                 break;
 
             case R.id.btnInterest:
-               // Toast.makeText(getApplicationContext(), String.valueOf(generalState), Toast.LENGTH_SHORT).show();
                 btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search));
                 btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest2));
                 btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps));
                 btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route));
 
-                InterestFragment interestFragment = new InterestFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.containerLayout, interestFragment)
-                        .commit();
-
-                interestFragment.setInterfaceInstitutes(new InterestFragment.InterfaceInstitutes() {
-
-                    @Override
-                    public void getInstitute(int flag1, int flag2, int flag3, int flag4, int flag5, int flag6) {
-                        map.clear();
-                        if(generalState == 1) {
-                            markerS = map.addMarker(new MarkerOptions()
-                                    .position(new LatLng(lati, longi))
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-               //             Toast.makeText(getApplicationContext(), String.valueOf(flag1) + String.valueOf(flag2) + String.valueOf(flag3) + String.valueOf(flag4) + String.valueOf(flag5) + String.valueOf(flag6), Toast.LENGTH_SHORT).show();
-                        }
-
-                            if (flag1 == 1) {
-                            for (int i = 0; i < hospitales.size(); i++) {
-                                map.addMarker(new MarkerOptions()
-                                        .position(hospitales.get(i))
-                                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_hospital)));
-                            }
-
-                        }
-
-                        if (flag2 == 1) {
-                            for (int i = 0; i < colegios.size(); i++) {
-                                map.addMarker(new MarkerOptions()
-                                        .position(colegios.get(i))
-                                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_school)));
-                            }
-                        }
-
-                        if (flag3 == 1) {
-                            for (int i = 0; i < hidrantes.size(); i++) {
-                                map.addMarker(new MarkerOptions()
-                                        .position(hidrantes.get(i))
-                                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_hydrant)));
-                            }
-                        }
-
-                        if (flag4 == 1) {
-                            for (int i = 0; i < bomberos.size(); i++) {
-                                map.addMarker(new MarkerOptions()
-                                        .position(bomberos.get(i))
-                                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_fireman)));
-                            }
-                        }
-
-                        if (flag5 == 1) {
-                            for (int i = 0; i < grifos.size(); i++) {
-                                map.addMarker(new MarkerOptions()
-                                        .position(grifos.get(i))
-                                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_gasstation)));
-                            }
-                        }
-
-                        if (flag6 == 1) {
-                            for (int i = 0; i < comisarias.size(); i++) {
-                                map.addMarker(new MarkerOptions()
-                                        .position(comisarias.get(i))
-                                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_policestation)));
-                            }
-                        }
-                    }
-                });
-                generalState = 2;
+                initInterestFragment();
                 break;
 
             case R.id.btnMaps:
-                //Toast.makeText(getApplicationContext(), String.valueOf(generalState), Toast.LENGTH_SHORT).show();
                 btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search));
                 btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest));
                 btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps2));
                 btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route));
 
-                MapsFragment mapsFragment = new MapsFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.containerLayout, mapsFragment)
-                        .commit();
-
-                mapsFragment.setInterfaceChangeMaps(new MapsFragment.InterfaceChangeMaps() {
-                    @Override
-                    public void getMaps(int flag) {
-                        if (flag == 1) {
-                            map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                            stateMapsDashboard = 1;
-                        }
-
-                        if (flag == 2) {
-                            map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-                            stateMapsDashboard = 2;
-                        }
-
-                        if (flag == 3) {
-                            map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-                            stateMapsDashboard = 3;
-                        }
-                    }
-                });
-                generalState = 3;
-
+                initMapsFragment();
                 break;
 
             case R.id.btnRoute:
-              //  Toast.makeText(getApplicationContext(), String.valueOf(generalState), Toast.LENGTH_SHORT).show();
                 btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search));
                 btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest));
                 btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps));
                 btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route2));
-                initRouteFragment();
 
+                initRouteFragment();
                 break;
         }
     }
@@ -296,14 +193,19 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         map.animateCamera(camUpd3);
     }
 
-    private void initSearhFragment() {
+    private void initSearchFragment() {
         searchFragment = new SearchFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.containerLayout, searchFragment).commit();
         //Toast.makeText(getApplicationContext(), "Mensaje de Prueba Primeraaa" + String.valueOf(generalState), Toast.LENGTH_SHORT).show();
 
-        if (generalState == 4 || generalState == 1) {
-            map.clear();
-        }
+        //if (generalState == 4 || generalState == 1) {
+         //   map.clear();
+        //}
+        /* Actualizar datos */
+        // Si hubo cambios, entonces actualizar. De lo contrario no se actualiza.
+
+        //Actualizar();
+
         searchFragment.setInterfaceSearch(new SearchFragment.InterfaceSearch() {
             @Override
             public void getAddress(String address) {
@@ -314,11 +216,27 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                     @Override
                     public void getLocation(String status, Double lat, Double lng) {
                         if (status.equals("OK")) {
+
+                            if (markerS != null) {
+                                markerS.remove();
+                            }
+                            if (markerO != null) {
+                                markerO.remove();
+                            }
+                            if (markerD != null) {
+                                markerD.remove();
+                            }
+
+                            if (routeList != null) {
+                                for (int k = 0; k < routeList.size(); k++)
+                                    routeList.get(k).remove();
+                            }
+
                             markerS = map.addMarker(new MarkerOptions()
                                     .position(new LatLng(lat, lng))
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-                                    lati=lat;
-                                    longi=lng;
+                            //lati=lat;
+                            //longi=lng;
                             camPos = new CameraPosition.Builder()
                                     .target(new LatLng(lat, lng))
                                     .zoom(16)
@@ -330,7 +248,153 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 });
             }
         });
-        generalState = 1;
+        //generalState = 1;
+    }
+
+    private void initInterestFragment(){
+
+        InterestFragment interestFragment = new InterestFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.containerLayout, interestFragment)
+                .commit();
+
+        interestFragment.setInterfaceInstitutes(new InterestFragment.InterfaceInstitutes() {
+            //(stateHospitales, stateColegios, stateHidrantes, stateBomberos, stateGrifos, stateComisarias);
+            @Override
+            public void getInstitute(int flag1, int flag2, int flag3, int flag4, int flag5, int flag6) {
+
+                if (markerHospitales != null) {
+                    for (int k = 0; k < markerHospitales.size(); k++) {
+                        markerHospitales.get(k).remove();
+                    }
+                }
+
+                if (markerColegios != null) {
+                    for (int k = 0; k < markerColegios.size(); k++) {
+                        markerColegios.get(k).remove();
+                    }
+                }
+
+                if (markerHidrantes != null) {
+                    for (int k = 0; k < markerHidrantes.size(); k++) {
+                        markerHidrantes.get(k).remove();
+                    }
+                }
+
+                if (markerBomberos != null) {
+                    for (int k = 0; k < markerBomberos.size(); k++) {
+                        markerBomberos.get(k).remove();
+                    }
+                }
+
+                if (markerGrifos != null) {
+                    for (int k = 0; k < markerGrifos.size(); k++) {
+                        markerGrifos.get(k).remove();
+                    }
+                }
+
+                if (markerComisarias != null) {
+                    for (int k = 0; k < markerComisarias.size(); k++) {
+                        markerComisarias.get(k).remove();
+                    }
+                }
+
+
+                if (flag1 == 1) {
+                    markerHospitales = new ArrayList<Marker>();
+
+                    for (int i = 0; i < hospitales.size(); i++) {
+                        Marker tempH = map.addMarker(new MarkerOptions()
+                                .position(hospitales.get(i))
+                                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_hospital)));
+                        markerHospitales.add(tempH);
+                    }
+                }
+
+                if (flag2 == 1) {
+                    markerColegios = new ArrayList<Marker>();
+
+                    for (int i = 0; i < colegios.size(); i++) {
+                        Marker tempC = map.addMarker(new MarkerOptions()
+                                .position(colegios.get(i))
+                                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_school)));
+                        markerColegios.add(tempC);
+                    }
+                }
+
+                if (flag3 == 1) {
+                    markerHidrantes = new ArrayList<Marker>();
+
+                    for (int i = 0; i < hidrantes.size(); i++) {
+                        Marker tempHi = map.addMarker(new MarkerOptions()
+                                .position(hidrantes.get(i))
+                                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_hydrant)));
+                        markerHidrantes.add(tempHi);
+                    }
+                }
+
+                if (flag4 == 1) {
+                    markerBomberos = new ArrayList<Marker>();
+
+                    for (int i = 0; i < bomberos.size(); i++) {
+                        Marker tempB = map.addMarker(new MarkerOptions()
+                                .position(bomberos.get(i))
+                                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_fireman)));
+                        markerBomberos.add(tempB);
+                    }
+                }
+
+                if (flag5 == 1) {
+                    markerGrifos = new ArrayList<Marker>();
+
+                    for (int i = 0; i < grifos.size(); i++) {
+                        Marker tempG = map.addMarker(new MarkerOptions()
+                                .position(grifos.get(i))
+                                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_gasstation)));
+                        markerGrifos.add(tempG);
+                    }
+                }
+
+                if (flag6 == 1) {
+                    markerComisarias = new ArrayList<Marker>();
+
+                    for (int i = 0; i < comisarias.size(); i++) {
+                        Marker tempCo = map.addMarker(new MarkerOptions()
+                                .position(comisarias.get(i))
+                                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_policestation)));
+                        markerComisarias.add(tempCo);
+                    }
+                }
+
+            }
+        });
+    }
+
+    private void initMapsFragment(){
+        MapsFragment mapsFragment = new MapsFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.containerLayout, mapsFragment)
+                .commit();
+
+        mapsFragment.setInterfaceChangeMaps(new MapsFragment.InterfaceChangeMaps() {
+            @Override
+            public void getMaps(int flag) {
+                if (flag == 1) {
+                    map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                    stateMapsDashboard = 1;
+                }
+
+                if (flag == 2) {
+                    map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                    stateMapsDashboard = 2;
+                }
+
+                if (flag == 3) {
+                    map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                    stateMapsDashboard = 3;
+                }
+            }
+        });
     }
 
     private void initRouteFragment() {
@@ -342,14 +406,6 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
             @Override
             public void getRoute(int s, String ruta) {
                 if (s == 1) {
-                    if (stateMap == 0) {
-                        if (generalState == 1 || generalState == 4) {
-                            map.clear();
-                        }
-                        stateMap = 1;
-                    }
-                    //if(stateMarkerO == 1){map.addMarker(new MarkerOptions().position(originLaLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));}
-                    //if(stateMarkerD == 1){map.addMarker(new MarkerOptions().position(destinationLaLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));}
 
                     mapOperation = new MapOperation();
                     mapOperation.getLocation(ruta);
@@ -357,12 +413,25 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                         @Override
                         public void getLocation(String status, Double lat, Double lng) {
                             if (status.equals("OK")) {
+
+                                if (markerS != null) {
+                                    markerS.remove();
+                                }
+                                if (markerO != null) {
+                                    markerO.remove();
+                                }
+
+                                if (routeList != null) {
+                                    for (int k = 0; k < routeList.size(); k++)
+                                        routeList.get(k).remove();
+                                }
+
                                 originLaLng = new LatLng(lat, lng);
                                 //markerO.setVisible(false);
                                 markerO = map.addMarker(new MarkerOptions()
                                         .position(originLaLng)
                                         .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)));
-                                stateMarkerO = 1;
+                                //stateMarkerO = 1;
                                 camPos = new CameraPosition.Builder()
                                         .target(originLaLng)
                                         .zoom(16)
@@ -375,15 +444,6 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 }
 
                 if (s == 2) {
-                    if (stateMap == 0) {
-                        if (generalState == 1 || generalState == 4) {
-                            map.clear();
-                        }
-
-                        stateMap = 1;
-                    }
-                    //if(stateMarkerO == 1){map.addMarker(new MarkerOptions().position(originLaLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));}
-                    //if(stateMarkerD == 1){map.addMarker(new MarkerOptions().position(destinationLaLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));}
 
                     mapOperation = new MapOperation();
                     mapOperation.getLocation(ruta);
@@ -391,12 +451,26 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                         @Override
                         public void getLocation(String status, Double lat, Double lng) {
                             if (status.equals("OK")) {
+
+                                if (markerS != null) {
+                                    markerS.remove();
+                                }
+
+                                if (markerD != null) {
+                                    markerD.remove();
+                                }
+
+                                if (routeList != null) {
+                                    for (int k = 0; k < routeList.size(); k++)
+                                        routeList.get(k).remove();
+                                }
+
                                 destinationLaLng = new LatLng(lat, lng);
                                 //markerD.setVisible(false);
                                 markerD = map.addMarker(new MarkerOptions()
                                         .position(destinationLaLng)
                                         .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker2)));
-                                stateMarkerD = 1;
+                                //stateMarkerD = 1;
                                 camPos = new CameraPosition.Builder()
                                         .target(destinationLaLng)
                                         .zoom(16)
@@ -421,6 +495,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                                     Log.e("objeto steps", steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").toString());
                                     startLocation = new ArrayList<LatLng>();
                                     endLocation = new ArrayList<LatLng>();
+                                    routeList = new ArrayList<Polyline>();
 
                                     for (int k = 0; k < steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").length(); k++) {
                                         startLocation.add(new LatLng(steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("start_location").getDouble("lat"), steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("start_location").getDouble("lng")));
@@ -428,16 +503,9 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                                         Polyline line = map.addPolyline(new PolylineOptions().
                                                 add(startLocation.get(k), endLocation.get(k))
                                                 .width(12).color(Color.rgb(150, 40, 27)));
+                                        routeList.add(line);
 
                                     }
-
-                                    map.addMarker(new MarkerOptions()
-                                            .position(originLaLng)
-                                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)));
-
-                                    map.addMarker(new MarkerOptions()
-                                            .position(destinationLaLng)
-                                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker2)));
 
                                     camPos = new CameraPosition.Builder()
                                             .target(new LatLng((originLaLng.latitude + destinationLaLng.latitude) / 2, (originLaLng.longitude + destinationLaLng.longitude) / 2))
@@ -446,7 +514,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                                     camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
                                     map.animateCamera(camUpd3);
 
-                                    stateMap = 0;
+                                    //stateMap = 0;
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -457,8 +525,8 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 }
             }
         });
-        generalState = 4;
     }
+
 
     private void loadMarkers() {
 
@@ -511,6 +579,11 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         comisarias.add(new LatLng(-12.076262, -77.052466));
         comisarias.add(new LatLng(-12.097624, -77.087343));
     }
+
+    public void Actualizar(){
+        if(markerS !=null){markerS.remove();}
+    }
+
 
     public void Alert(View v) {
         if (v.getId() == R.id.float_button) {

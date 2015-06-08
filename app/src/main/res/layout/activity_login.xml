@@ -46,7 +46,7 @@
             android:hint="@string/usuario"
             android:inputType="textEmailAddress"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
         <EditText
             android:id="@+id/txtPass"
@@ -58,7 +58,7 @@
             android:hint="@string/contraseña"
             android:inputType="textPassword"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
 
     </LinearLayout>
