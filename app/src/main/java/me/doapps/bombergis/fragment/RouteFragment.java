@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +40,9 @@ public class RouteFragment extends Fragment implements View.OnClickListener {
     private ArrayList<String> resultList;
     private ArrayList<String> referenceList;
 
+    static String routeOrigin;
+    static String routeDestino;
+
     public RouteFragment() {
     }
 
@@ -48,9 +54,14 @@ public class RouteFragment extends Fragment implements View.OnClickListener {
         //btnBscRuta2 = (Button)view.findViewById(R.id.btnBscRuta2);
         autoCompleteOrigen = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteOrigen);
         autoCompleteDestino = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteDestino);
+        autoCompleteOrigen.setText(routeOrigin);
+        autoCompleteDestino.setText(routeDestino);
 
         return view;
     }
+
+    static int stateOrigin = 0;
+    static int stateDestino = 0;
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -59,8 +70,25 @@ public class RouteFragment extends Fragment implements View.OnClickListener {
         autoCompleteOrigen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.e("Lugar - Reference", resultList.get(i) + "--" + referenceList.get(i));
-                interfaceRoute.getRoute(1, referenceList.get(i));
+                routeOrigin = resultList.get(i);
+                Log.e("Lugar - Reference", routeOrigin + "--" + referenceList.get(i));
+                interfaceRoute.getRoute(1, referenceList.get(i)); stateOrigin = 1;
+            }
+        });
+
+        autoCompleteOrigen.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                interfaceRoute.getRoute(1, ""); routeOrigin = autoCompleteOrigen.getText().toString();stateOrigin = 1;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
@@ -68,18 +96,38 @@ public class RouteFragment extends Fragment implements View.OnClickListener {
         autoCompleteDestino.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.e("Lugar - Reference", resultList.get(i) + "--" + referenceList.get(i));
-                interfaceRoute.getRoute(2, referenceList.get(i));
+                routeDestino = resultList.get(i);
+                Log.e("Lugar - Reference", routeDestino + "--" + referenceList.get(i));
+                interfaceRoute.getRoute(2, referenceList.get(i)); stateDestino = 1;
+            }
+        });
+
+        autoCompleteDestino.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                interfaceRoute.getRoute(2, ""); routeDestino = autoCompleteDestino.getText().toString();stateDestino = 1;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
         btnBscRuta.setOnClickListener(this);
-        //btnBscRuta2.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnBscRuta) {
+
+            if(stateOrigin == 0){interfaceRoute.getRoute(1, autoCompleteOrigen.getText().toString()); stateOrigin = 0;}
+            if(stateDestino == 0){interfaceRoute.getRoute(2, autoCompleteDestino.getText().toString()); stateDestino = 0;}
             interfaceRoute.getRoute(3, "ROUTE");
         }
         //if(v.getId() == R.id.btnBscRuta2){interfaceRoute.getRoute(2, autoCompleteDestino.getText().toString());}

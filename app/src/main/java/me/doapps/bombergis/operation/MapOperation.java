@@ -30,7 +30,7 @@ import me.doapps.bombergis.config.Settings;
  */
 public class MapOperation {
     private Context context;
-    private String wskey = "AIzaSyCSDq1nP90Cuu4NyGOBTQV8prYuShmbQyA";
+    private String wskey = "AIzaSyADsTeLgdqLkX_qlOG_8glwbDjxtcjx3VY";
     private GoogleMap mMap;
 
     private InterfaceReference interfaceReference;
@@ -150,8 +150,10 @@ public class MapOperation {
                 try {
                     interfaceLocation.getLocation(response.getString("status"),response.getJSONObject("result").getJSONObject("geometry").getJSONObject("location").getDouble("lat"),response.getJSONObject("result").getJSONObject("geometry").getJSONObject("location").getDouble("lng"));
                 } catch (JSONException e) {
+                    interfaceLocation.getLocation("",0.,0.);
                     e.printStackTrace();
                 }
+
             }
 
             @Override

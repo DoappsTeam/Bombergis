@@ -81,9 +81,10 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     static LatLng originLaLng;
     static LatLng destinationLaLng;
 
-    public static ArrayList<LatLng> startLocation;
-    public static ArrayList<LatLng> endLocation;
-    public static ArrayList<Polyline> routeList;
+    static public ArrayList<LatLng> startLocation;
+    static public ArrayList<LatLng> endLocation;
+    static public ArrayList<Polyline> routeList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +109,8 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         initSearchFragment();
         /*cargamos markers*/
         loadMarkers();
+
+        routeList = new ArrayList<Polyline>();
     }
 
 
@@ -167,7 +170,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     }
 
     private void setUpMap() {
-        map.setMyLocationEnabled(true);
+        //map.setMyLocationEnabled(true);
 
         if (stateMapsDashboard == 1) {
             map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -196,15 +199,6 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     private void initSearchFragment() {
         searchFragment = new SearchFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.containerLayout, searchFragment).commit();
-        //Toast.makeText(getApplicationContext(), "Mensaje de Prueba Primeraaa" + String.valueOf(generalState), Toast.LENGTH_SHORT).show();
-
-        //if (generalState == 4 || generalState == 1) {
-         //   map.clear();
-        //}
-        /* Actualizar datos */
-        // Si hubo cambios, entonces actualizar. De lo contrario no se actualiza.
-
-        //Actualizar();
 
         searchFragment.setInterfaceSearch(new SearchFragment.InterfaceSearch() {
             @Override
@@ -248,10 +242,9 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 });
             }
         });
-        //generalState = 1;
     }
 
-    private void initInterestFragment(){
+    private void initInterestFragment() {
 
         InterestFragment interestFragment = new InterestFragment();
         getSupportFragmentManager().beginTransaction()
@@ -370,7 +363,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         });
     }
 
-    private void initMapsFragment(){
+    private void initMapsFragment() {
         MapsFragment mapsFragment = new MapsFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.containerLayout, mapsFragment)
@@ -397,6 +390,9 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         });
     }
 
+    static int stateOriginMarker = 0;
+    static int stateDestinoMarker = 0;
+
     private void initRouteFragment() {
         routeFragment = new RouteFragment();
         getSupportFragmentManager().beginTransaction()
@@ -407,31 +403,31 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
             public void getRoute(int s, String ruta) {
                 if (s == 1) {
 
+                    if (markerS != null) {
+                        markerS.remove();
+                    }
+                    if (markerO != null) {
+                        markerO.remove();
+                    }
+
+                    if (routeList != null) {
+                        for (int k = 0; k < routeList.size(); k++)
+                            routeList.get(k).remove();
+                    }
+
                     mapOperation = new MapOperation();
                     mapOperation.getLocation(ruta);
                     mapOperation.setInterfaceLocation(new MapOperation.InterfaceLocation() {
                         @Override
                         public void getLocation(String status, Double lat, Double lng) {
+
                             if (status.equals("OK")) {
 
-                                if (markerS != null) {
-                                    markerS.remove();
-                                }
-                                if (markerO != null) {
-                                    markerO.remove();
-                                }
-
-                                if (routeList != null) {
-                                    for (int k = 0; k < routeList.size(); k++)
-                                        routeList.get(k).remove();
-                                }
-
                                 originLaLng = new LatLng(lat, lng);
-                                //markerO.setVisible(false);
                                 markerO = map.addMarker(new MarkerOptions()
                                         .position(originLaLng)
                                         .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)));
-                                //stateMarkerO = 1;
+                                stateOriginMarker = 1;
                                 camPos = new CameraPosition.Builder()
                                         .target(originLaLng)
                                         .zoom(16)
@@ -439,38 +435,41 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                                 camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
                                 map.animateCamera(camUpd3);
                             }
+                            else{
+                                stateOriginMarker = 0;
+                            }
                         }
                     });
                 }
 
                 if (s == 2) {
 
+                    if (markerS != null) {
+                        markerS.remove();
+                    }
+
+                    if (markerD != null) {
+                        markerD.remove();
+                    }
+
+                    if (routeList != null) {
+                        for (int k = 0; k < routeList.size(); k++)
+                            routeList.get(k).remove();
+                    }
+
                     mapOperation = new MapOperation();
                     mapOperation.getLocation(ruta);
                     mapOperation.setInterfaceLocation(new MapOperation.InterfaceLocation() {
                         @Override
                         public void getLocation(String status, Double lat, Double lng) {
+
                             if (status.equals("OK")) {
 
-                                if (markerS != null) {
-                                    markerS.remove();
-                                }
-
-                                if (markerD != null) {
-                                    markerD.remove();
-                                }
-
-                                if (routeList != null) {
-                                    for (int k = 0; k < routeList.size(); k++)
-                                        routeList.get(k).remove();
-                                }
-
                                 destinationLaLng = new LatLng(lat, lng);
-                                //markerD.setVisible(false);
                                 markerD = map.addMarker(new MarkerOptions()
                                         .position(destinationLaLng)
                                         .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker2)));
-                                //stateMarkerD = 1;
+                                stateDestinoMarker = 1;
                                 camPos = new CameraPosition.Builder()
                                         .target(destinationLaLng)
                                         .zoom(16)
@@ -478,50 +477,74 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                                 camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
                                 map.animateCamera(camUpd3);
                             }
+
+                            else{
+                                stateDestinoMarker = 0;
+                            }
                         }
                     });
                 }
 
                 if (s == 3) {
-                    //map.clear();
-                    mapOperation = new MapOperation();
-                    mapOperation.getSteps(String.valueOf(originLaLng.latitude) + "," + String.valueOf(originLaLng.longitude), String.valueOf(destinationLaLng.latitude) + "," + String.valueOf(destinationLaLng.longitude));
-                    mapOperation.setInterfaceSteps(new MapOperation.InterfaceSteps() {
-                        @Override
-                        public void getRouteSteps(String status, JSONObject steps) {
-                            if (status.equals("OK")) {
-                                try {
-                                    //JSONArray arraySteps = new JSONArray(steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps"));
-                                    Log.e("objeto steps", steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").toString());
-                                    startLocation = new ArrayList<LatLng>();
-                                    endLocation = new ArrayList<LatLng>();
-                                    routeList = new ArrayList<Polyline>();
 
-                                    for (int k = 0; k < steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").length(); k++) {
-                                        startLocation.add(new LatLng(steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("start_location").getDouble("lat"), steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("start_location").getDouble("lng")));
-                                        endLocation.add(new LatLng(steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("end_location").getDouble("lat"), steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("end_location").getDouble("lng")));
-                                        Polyline line = map.addPolyline(new PolylineOptions().
-                                                add(startLocation.get(k), endLocation.get(k))
-                                                .width(12).color(Color.rgb(150, 40, 27)));
-                                        routeList.add(line);
+                    if (markerS != null) {
+                        markerS.remove();
+                    }
 
+                    /*Validación de Markers*/
+
+                    if((stateOriginMarker == 1)&&(stateDestinoMarker == 1)){
+
+                        //stateOriginMarker = 0;
+                        //stateDestinoMarker = 0;
+
+                        mapOperation = new MapOperation();
+                        mapOperation.getSteps(String.valueOf(originLaLng.latitude) + "," + String.valueOf(originLaLng.longitude), String.valueOf(destinationLaLng.latitude) + "," + String.valueOf(destinationLaLng.longitude));
+
+                        mapOperation.setInterfaceSteps(new MapOperation.InterfaceSteps() {
+                            @Override
+                            public void getRouteSteps(String status, JSONObject steps) {
+                                if (status.equals("OK")) {
+                                    try {
+                                        //JSONArray arraySteps = new JSONArray(steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps"));
+                                        Log.e("objeto steps", steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").toString());
+                                        startLocation = new ArrayList<LatLng>();
+                                        endLocation = new ArrayList<LatLng>();
+
+
+                                        for (int k = 0; k < steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").length(); k++) {
+                                            startLocation.add(new LatLng(steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("start_location").getDouble("lat"), steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("start_location").getDouble("lng")));
+                                            endLocation.add(new LatLng(steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("end_location").getDouble("lat"), steps.getJSONArray("legs").getJSONObject(0).getJSONArray("steps").getJSONObject(k).getJSONObject("end_location").getDouble("lng")));
+                                            Polyline line = map.addPolyline(new PolylineOptions().
+                                                    add(startLocation.get(k), endLocation.get(k))
+                                                    .width(10).color(Color.rgb(150, 40, 27)));
+                                            routeList.add(line);
+
+                                        }
+
+                                        camPos = new CameraPosition.Builder()
+                                                .target(new LatLng((originLaLng.latitude + destinationLaLng.latitude) / 2, (originLaLng.longitude + destinationLaLng.longitude) / 2))
+                                                .zoom(13)
+                                                .build();
+                                        camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
+                                        map.animateCamera(camUpd3);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
                                     }
-
-                                    camPos = new CameraPosition.Builder()
-                                            .target(new LatLng((originLaLng.latitude + destinationLaLng.latitude) / 2, (originLaLng.longitude + destinationLaLng.longitude) / 2))
-                                            .zoom(13)
-                                            .build();
-                                    camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
-                                    map.animateCamera(camUpd3);
-
-                                    //stateMap = 0;
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
                                 }
                             }
-                        }
-                    });
+                        });
+                    }
+
+                    else{
+                            if(stateOriginMarker == 0){
+                                Toast.makeText(DashboardActivity.this,"Ingresar Origen",Toast.LENGTH_SHORT).show();
+                            }
+                        else{
+                                Toast.makeText(DashboardActivity.this,"Ingresar Destino",Toast.LENGTH_SHORT).show();
+                            }
+                    }
                 }
             }
         });
@@ -580,8 +603,10 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         comisarias.add(new LatLng(-12.097624, -77.030343));
     }
 
-    public void Actualizar(){
-        if(markerS !=null){markerS.remove();}
+    public void Actualizar() {
+        if (markerS != null) {
+            markerS.remove();
+        }
     }
 
 
