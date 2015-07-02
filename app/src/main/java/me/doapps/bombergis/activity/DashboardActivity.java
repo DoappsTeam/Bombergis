@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -85,6 +86,15 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     static public ArrayList<LatLng> endLocation;
     static public ArrayList<Polyline> routeList;
 
+    static public Double dashLat = -12.1023776;
+    static public Double dashLng = -77.0219219;
+
+    static public Double origenLat = 0.;
+    static public Double origenLng = 0.;
+
+    static public Double destinoLat = 0.;
+    static public Double destinoLng = 0.;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +121,29 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         loadMarkers();
 
         routeList = new ArrayList<Polyline>();
+
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+
+                if (markerS.isInfoWindowShown()) {
+                    markerS.hideInfoWindow();
+                } else {
+                    markerS.showInfoWindow();
+                }
+
+                return false;
+            }
+        });
+
+        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                if (marker.getId() == markerS.getId()) {
+                    markerS.hideInfoWindow();
+                }
+            }
+        });
     }
 
 
@@ -157,6 +190,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         }
     }
 
+
     /**
      * Methods and Functions*
      */
@@ -182,11 +216,11 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
             map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         }
 
-        map.getUiSettings().setZoomControlsEnabled(true);
+        //map.getUiSettings().setZoomControlsEnabled(true);
         //mapSettings = map.getUiSettings();
-        map.getUiSettings().setScrollGesturesEnabled(true);
-        map.getUiSettings().setTiltGesturesEnabled(true);
-        map.getUiSettings().setRotateGesturesEnabled(true);
+        //map.getUiSettings().setScrollGesturesEnabled(true);
+        // map.getUiSettings().setTiltGesturesEnabled(true);
+        // map.getUiSettings().setRotateGesturesEnabled(true);
 
         camPos = new CameraPosition.Builder()
                 .target(new LatLng(-12.1023776, -77.0219219))
@@ -194,9 +228,38 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                 .build();
         camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
         map.animateCamera(camUpd3);
+        map.setInfoWindowAdapter(new MarkerInfoWindowAdapter());
+
     }
 
     private void initSearchFragment() {
+
+        if (markerS != null) {
+            markerS.remove();
+        }
+        if (markerO != null) {
+            markerO.remove();
+        }
+        if (markerD != null) {
+            markerD.remove();
+        }
+
+        if (routeList != null) {
+            for (int k = 0; k < routeList.size(); k++)
+                routeList.get(k).setVisible(false);
+        }
+
+        markerS = map.addMarker(new MarkerOptions()
+                        .position(new LatLng(dashLat, dashLng))
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+        );
+        camPos = new CameraPosition.Builder()
+                .target(new LatLng(dashLat, dashLng))
+                .zoom(16)
+                .build();
+        camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
+        map.animateCamera(camUpd3);
+
         searchFragment = new SearchFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.containerLayout, searchFragment).commit();
 
@@ -226,11 +289,14 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                     public void getLocation(String status, Double lat, Double lng) {
                         if (status.equals("OK")) {
 
+                            dashLat = lat;
+                            dashLng = lng;
                             markerS = map.addMarker(new MarkerOptions()
-                                    .position(new LatLng(lat, lng))
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                                            .position(new LatLng(dashLat, dashLng))
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                            );
                             camPos = new CameraPosition.Builder()
-                                    .target(new LatLng(lat, lng))
+                                    .target(new LatLng(dashLat, dashLng))
                                     .zoom(16)
                                     .build();
                             camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
@@ -392,6 +458,26 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     static int stateDestinoMarker = 0;
 
     private void initRouteFragment() {
+
+        if (stateOriginMarker == 1) {
+            markerS.remove();
+
+            markerO = map.addMarker(new MarkerOptions()
+                    .position(originLaLng)
+                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)));
+        }
+
+        if (stateDestinoMarker == 1) {
+            markerD = map.addMarker(new MarkerOptions()
+                    .position(destinationLaLng)
+                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)));
+        }
+
+        if (routeList != null) {
+            for (int k = 0; k < routeList.size(); k++)
+                routeList.get(k).setVisible(true);
+        }
+
         routeFragment = new RouteFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.containerLayout, routeFragment)
@@ -432,8 +518,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                                         .build();
                                 camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
                                 map.animateCamera(camUpd3);
-                            }
-                            else{
+                            } else {
                                 stateOriginMarker = 0;
                             }
                         }
@@ -474,9 +559,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                                         .build();
                                 camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
                                 map.animateCamera(camUpd3);
-                            }
-
-                            else{
+                            } else {
                                 stateDestinoMarker = 0;
                             }
                         }
@@ -491,7 +574,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
 
                     /*Validación de Markers*/
 
-                    if((stateOriginMarker == 1)&&(stateDestinoMarker == 1)){
+                    if ((stateOriginMarker == 1) && (stateDestinoMarker == 1)) {
 
                         //stateOriginMarker = 0;
                         //stateDestinoMarker = 0;
@@ -533,15 +616,12 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                                 }
                             }
                         });
-                    }
-
-                    else{
-                            if(stateOriginMarker == 0){
-                                Toast.makeText(DashboardActivity.this,"Ingresar Origen",Toast.LENGTH_SHORT).show();
-                            }
-                        else{
-                                Toast.makeText(DashboardActivity.this,"Ingresar Destino",Toast.LENGTH_SHORT).show();
-                            }
+                    } else {
+                        if (stateOriginMarker == 0) {
+                            Toast.makeText(DashboardActivity.this, "Ingresar Origen", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(DashboardActivity.this, "Ingresar Destino", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
@@ -601,16 +681,41 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         comisarias.add(new LatLng(-12.097624, -77.030343));
     }
 
-    public void Actualizar() {
-        if (markerS != null) {
-            markerS.remove();
-        }
-    }
-
-
     public void Alert(View v) {
         if (v.getId() == R.id.float_button) {
             Toast.makeText(getApplicationContext(), R.string.alert, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public boolean onMarkerClick(Marker marker) {
+        return false;
+    }
+
+    /*Custom Map*/
+    public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
+        public MarkerInfoWindowAdapter() {
+        }
+
+        @Override
+        public View getInfoWindow(Marker marker) {
+            return null;
+        }
+
+        @Override
+        public View getInfoContents(Marker marker) {
+            View view = getLayoutInflater().inflate(R.layout.custom_map, null);
+            /*ListView list_comments = (ListView)view.findViewById(R.id.list_comments);
+
+            ArrayList<Comment_DTO> comment_dtos = new ArrayList<Comment_DTO>();
+
+            comment_dtos.add(new Comment_DTO("Está vacío", "07 SET. a las 10PM"));
+            comment_dtos.add(new Comment_DTO("Muy buenos grupos", "05 SET. a las 10PM"));
+            comment_dtos.add(new Comment_DTO("Las mujeres pagan", "22 AGO. a las 10PM"));
+            comment_dtos.add(new Comment_DTO("Nunca más vengo", "18 AGO. a las 10PM"));
+
+            list_comments.setAdapter(new Comment_Adapter(comment_dtos, Nomad_Event_Detail.this));
+*/
+            return view;
         }
     }
 }

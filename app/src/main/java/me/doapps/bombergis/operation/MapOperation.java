@@ -30,7 +30,7 @@ import me.doapps.bombergis.config.Settings;
  */
 public class MapOperation {
     private Context context;
-    private String wskey = "AIzaSyADsTeLgdqLkX_qlOG_8glwbDjxtcjx3VY";
+    private String wskey = "AIzaSyBsy_H2fkcm4-eiIFszDVmQqfP66exG5sM";
     private GoogleMap mMap;
 
     private InterfaceReference interfaceReference;
