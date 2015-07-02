@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +39,7 @@ public class SearchFragment extends Fragment {
 
     private ArrayList<String> resultList;
     private ArrayList<String> referenceList;
+    static String searchPlace;
 
     public SearchFragment() {
     }
@@ -48,6 +51,8 @@ public class SearchFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         //btnBuscar = (Button) view.findViewById(R.id.btnBuscar);
         txtAddress = (AutoCompleteTextView) view.findViewById(R.id.txtAddress);
+
+        txtAddress.setText(searchPlace);
         return view;
     }
 
@@ -60,18 +65,32 @@ public class SearchFragment extends Fragment {
         txtAddress.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.e("Lugar - Reference", resultList.get(i) + "-" + referenceList.get(i));
+                searchPlace = resultList.get(i);
+                Log.e("Lugar - Reference", searchPlace + "-" + referenceList.get(i));
                 interfaceSearch.getAddress(referenceList.get(i));
             }
         });
 
-        //btnBuscar.setOnClickListener(this);
+        txtAddress.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                interfaceSearch.getAddress(""); searchPlace = txtAddress.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
 
-    /*@Override
-    public void onClick(View v) {
-        interfaceSearch.getAddress(txtAddress.getText().toString());
-    }*/
+
 
 
     /**

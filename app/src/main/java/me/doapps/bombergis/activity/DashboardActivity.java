@@ -204,6 +204,21 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
             @Override
             public void getAddress(String address) {
 
+                if (markerS != null) {
+                    markerS.remove();
+                }
+                if (markerO != null) {
+                    markerO.remove();
+                }
+                if (markerD != null) {
+                    markerD.remove();
+                }
+
+                if (routeList != null) {
+                    for (int k = 0; k < routeList.size(); k++)
+                        routeList.get(k).remove();
+                }
+
                 mapOperation = new MapOperation();
                 mapOperation.getLocation(address);
                 mapOperation.setInterfaceLocation(new MapOperation.InterfaceLocation() {
@@ -211,26 +226,9 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                     public void getLocation(String status, Double lat, Double lng) {
                         if (status.equals("OK")) {
 
-                            if (markerS != null) {
-                                markerS.remove();
-                            }
-                            if (markerO != null) {
-                                markerO.remove();
-                            }
-                            if (markerD != null) {
-                                markerD.remove();
-                            }
-
-                            if (routeList != null) {
-                                for (int k = 0; k < routeList.size(); k++)
-                                    routeList.get(k).remove();
-                            }
-
                             markerS = map.addMarker(new MarkerOptions()
                                     .position(new LatLng(lat, lng))
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-                            //lati=lat;
-                            //longi=lng;
                             camPos = new CameraPosition.Builder()
                                     .target(new LatLng(lat, lng))
                                     .zoom(16)
