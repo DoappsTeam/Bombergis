@@ -2,7 +2,7 @@
     <!-- General Strings -->
     <string name="app_name">Bombergis</string>
     <string name="title_item_detail">Item Detail</string>
-    <string name="google_maps_key">AIzaSyAPvSIDsSWoz1vbdD0_MSu46rko0QwxUaY</string>
+    <string name="google_maps_key">AIzaSyA9SRjlREIErpVgPPP50U78yxwActRFDqg</string>
 
     <!-- Login Activity -->
     <string name="login">Login</string>
@@ -32,7 +32,7 @@
     <string name="alert">Se envio Alarma a todas las Unidades</string>
     <!-- Web services -->
     <string name="sensor">false</string>
-    <string name="browser_key">AIzaSyADsTeLgdqLkX_qlOG_8glwbDjxtcjx3VY</string>
+    <string name="browser_key">AIzaSyBsy_H2fkcm4-eiIFszDVmQqfP66exG5sM</string>
     <string name="components">country:pe</string>
 
 
