@@ -43,7 +43,6 @@ import me.doapps.bombergis.operation.MapOperation;
  * Created by user on 27/05/2015.
  */
 public class DashboardActivity extends ActionBarActivity implements View.OnClickListener {
-
     private ImageButton btnSearch;
     private ImageButton btnInterest;
     private ImageButton btnMaps;
@@ -88,13 +87,6 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
 
     static public Double dashLat = -12.1023776;
     static public Double dashLng = -77.0219219;
-
-    static public Double origenLat = 0.;
-    static public Double origenLng = 0.;
-
-    static public Double destinoLat = 0.;
-    static public Double destinoLng = 0.;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,37 +145,37 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
 
         switch (v.getId()) {
             case R.id.btnSearch:
-                btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search2));
-                btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest));
-                btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps));
-                btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route));
+                btnSearch.setImageResource(R.mipmap.ic_search2);
+                btnInterest.setImageResource(R.mipmap.ic_interest);
+                btnMaps.setImageResource(R.mipmap.ic_maps);
+                btnRoute.setImageResource(R.mipmap.ic_route);
 
                 initSearchFragment();
                 break;
 
             case R.id.btnInterest:
-                btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search));
-                btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest2));
-                btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps));
-                btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route));
+                btnSearch.setImageResource(R.mipmap.ic_search);
+                btnInterest.setImageResource(R.mipmap.ic_interest2);
+                btnMaps.setImageResource(R.mipmap.ic_maps);
+                btnRoute.setImageResource(R.mipmap.ic_route);
 
                 initInterestFragment();
                 break;
 
             case R.id.btnMaps:
-                btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search));
-                btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest));
-                btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps2));
-                btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route));
+                btnSearch.setImageResource(R.mipmap.ic_search);
+                btnInterest.setImageResource(R.mipmap.ic_interest);
+                btnMaps.setImageResource(R.mipmap.ic_maps2);
+                btnRoute.setImageResource(R.mipmap.ic_route);
 
                 initMapsFragment();
                 break;
 
             case R.id.btnRoute:
-                btnSearch.setImageDrawable(getDrawable(R.mipmap.ic_search));
-                btnInterest.setImageDrawable(getDrawable(R.mipmap.ic_interest));
-                btnMaps.setImageDrawable(getDrawable(R.mipmap.ic_maps));
-                btnRoute.setImageDrawable(getDrawable(R.mipmap.ic_route2));
+                btnSearch.setImageResource(R.mipmap.ic_search);
+                btnInterest.setImageResource(R.mipmap.ic_interest);
+                btnMaps.setImageResource(R.mipmap.ic_maps);
+                btnRoute.setImageResource(R.mipmap.ic_route2);
 
                 initRouteFragment();
                 break;
@@ -204,8 +196,6 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
     }
 
     private void setUpMap() {
-        //map.setMyLocationEnabled(true);
-
         if (stateMapsDashboard == 1) {
             map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         }
@@ -215,12 +205,6 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         if (stateMapsDashboard == 3) {
             map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         }
-
-        //map.getUiSettings().setZoomControlsEnabled(true);
-        //mapSettings = map.getUiSettings();
-        //map.getUiSettings().setScrollGesturesEnabled(true);
-        // map.getUiSettings().setTiltGesturesEnabled(true);
-        // map.getUiSettings().setRotateGesturesEnabled(true);
 
         camPos = new CameraPosition.Builder()
                 .target(new LatLng(-12.1023776, -77.0219219))
@@ -572,7 +556,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
                         markerS.remove();
                     }
 
-                    /*Validación de Markers*/
+                    /*Validaciï¿½n de Markers*/
 
                     if ((stateOriginMarker == 1) && (stateDestinoMarker == 1)) {
 
@@ -704,17 +688,6 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         @Override
         public View getInfoContents(Marker marker) {
             View view = getLayoutInflater().inflate(R.layout.custom_map, null);
-            /*ListView list_comments = (ListView)view.findViewById(R.id.list_comments);
-
-            ArrayList<Comment_DTO> comment_dtos = new ArrayList<Comment_DTO>();
-
-            comment_dtos.add(new Comment_DTO("Está vacío", "07 SET. a las 10PM"));
-            comment_dtos.add(new Comment_DTO("Muy buenos grupos", "05 SET. a las 10PM"));
-            comment_dtos.add(new Comment_DTO("Las mujeres pagan", "22 AGO. a las 10PM"));
-            comment_dtos.add(new Comment_DTO("Nunca más vengo", "18 AGO. a las 10PM"));
-
-            list_comments.setAdapter(new Comment_Adapter(comment_dtos, Nomad_Event_Detail.this));
-*/
             return view;
         }
     }
